@@ -1,6 +1,4 @@
 import { createTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
 
 const arcBlue = "#0B72B9";
 const arcOrange = "#FFBA60";
@@ -19,9 +17,11 @@ export default createTheme({
         }
     },
     typography: {
-        h3: {
-            fontWeight: 300,
-            fontSize: `2rem`
+        tab: {
+            fontFamily: "Raleway",
+            textTransform: "none",
+            fontWeight: 700,
+            fontSize: "1rem"
         }
     }
 });
