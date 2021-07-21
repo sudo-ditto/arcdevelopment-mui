@@ -22,6 +22,12 @@ export default createTheme({
             textTransform: "none",
             fontWeight: 700,
             fontSize: "1rem"
+        },
+        estimate: {
+            fontFamily: "Pacifico, sans-serif",
+            fontSize: "1rem",
+            color: "white",
+            textTransform: "none"
         }
     }
 });
