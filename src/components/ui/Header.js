@@ -29,7 +29,21 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function SimpleTabs() {
+
+function ElevationScroll(props) {
+    const { children } = props;
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0
+    });
+
+    return React.cloneElement(children, {
+        elevation: trigger ? 4 : 0,
+    });
+}
+
+
+const Header = () => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -37,43 +51,27 @@ export default function SimpleTabs() {
         setValue(newValue);
     };
 
-    function ElevationScroll(props) {
-        const { children } = props;
-        const trigger = useScrollTrigger({
-            disableHysteresis: true,
-            threshold: 0
-        });
+    return (
+        <>
+            <ElevationScroll>
+                <AppBar position="fixed">
+                    <Toolbar disableGutters>
+                        <img src={logo} alt="Arc Development Company Logo" className={classes.logo} />
+                        <Tabs aria-label="Main Navigation" className={classes.tabContainer}>
+                            <Tab className={classes.tab} label="Home" />
+                            <Tab className={classes.tab} label="Services" />
+                            <Tab className={classes.tab} label="The Revolution" />
+                            <Tab className={classes.tab} label="About Us" />
+                            <Tab className={classes.tab} label="Contact Us" />
+                        </Tabs>
+                    </Toolbar>
 
-        return React.cloneElement(children, {
-            elevation: trigger ? 4 : 0,
-        });
-    }
+                </AppBar>
+            </ElevationScroll>
+            <div className={classes.toolbarMargin}></div>
+        </>
+    );
+}
 
-
-    const Header = () => {
-        const classes = useStyles();
-
-        return (
-            <>
-                <ElevationScroll>
-                    <AppBar position="fixed">
-                        <Toolbar disableGutters>
-                            <img src={logo} alt="Arc Development Company Logo" className={classes.logo} />
-                            <Tabs aria-label="Main Navigation" className={classes.tabContainer}>
-                                <Tab className={classes.tab} label="Home" />
-                                <Tab className={classes.tab} label="Services" />
-                                <Tab className={classes.tab} label="The Revolution" />
-                                <Tab className={classes.tab} label="About Us" />
-                                <Tab className={classes.tab} label="Contact Us" />
-                            </Tabs>
-                        </Toolbar>
-
-                    </AppBar>
-                </ElevationScroll>
-                <div className={classes.toolbarMargin}></div>
-            </>
-        );
-    }
-
-    export default Header;
+export default Header;
 
