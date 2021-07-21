@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Material UI
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -52,7 +52,7 @@ function ElevationScroll(props) {
 
 const Header = () => {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -64,7 +64,7 @@ const Header = () => {
                 <AppBar position="fixed">
                     <Toolbar disableGutters>
                         <img src={logo} alt="Arc Development Company Logo" className={classes.logo} />
-                        <Tabs aria-label="Main Navigation" className={classes.tabContainer}>
+                        <Tabs value={value} onChange={handleChange} aria-label="Main Navigation" className={classes.tabContainer} indicatorColor="primary">
                             <Tab className={classes.tab} label="Home" />
                             <Tab className={classes.tab} label="Services" />
                             <Tab className={classes.tab} label="The Revolution" />
