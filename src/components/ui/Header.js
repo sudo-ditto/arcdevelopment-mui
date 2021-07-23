@@ -18,11 +18,23 @@ const useStyles = makeStyles(theme => ({
     // Puts a cushion behind our nav bar so that the next content is visible 
     toolbarMargin: {
         ...theme.mixins.toolbar,
-        marginBottom: "3.5em"
+        marginBottom: "3.5em",
+        [theme.breakpoints.down("md")]: {
+            marginBottom: "2em"
+        },
+        [theme.breakpoints.down("xs")]: {
+            marginBottom: "1.25em"
+        }
     },
     logo: {
         // Adding extra height in order to put the following content
-        height: "8em"
+        height: "8em",
+        [theme.breakpoints.down("md")]: {
+            height: "7em"
+        },
+        [theme.breakpoints.down("xs")]: {
+            height: "5.5em"
+        }
     },
     logoContainer: {
         padding: 0,
