@@ -20,6 +20,7 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { indexedAccessType } from '@babel/types';
 
 const useStyles = makeStyles(theme => ({
     // Puts a cushion behind our nav bar so that the next content is visible 
@@ -173,6 +174,18 @@ const Header = () => {
         setOpenMenu(false);
     }
 
+    const renderTabs = (name, link, index) => {
+        if (name === "Services") {
+            return (
+                <Tab key={index} className={classes.tab} label={name} component={Link} to={link} aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={e => handleClick(e)} />
+            );
+        } else {
+            return (
+                <Tab key={index} className={classes.tab} label={name} component={Link} to={link} />
+            );
+        }
+    }
+
     // Correct page refresh default active link always being home 
 
     useEffect(() => {
@@ -190,18 +203,18 @@ const Header = () => {
                     break;
             }
         });
-        // eslint-disable-next-line 
-    }, [value, menuOptions, selectedIndex, routes])
+    }, [value, selectedIndex])
 
     const tabs = (
         <>
-            <Tabs value={value} onChange={handleChange} aria-label="Main Navigation" className={classes.tabContainer} indicatorColor="primary">
-                <Tab className={classes.tab} label="Home" component={Link} to="/" />
-                <Tab className={classes.tab} label="Services" component={Link} to="/services" aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={e => handleClick(e)} />
-                <Tab className={classes.tab} label="The Revolution" component={Link} to="revolution" />
-                <Tab className={classes.tab} label="About Us" component={Link} to="about" />
-                <Tab className={classes.tab} label="Contact Us" component={Link} to="contact" />
+            <Tabs value={value}
+                onChange={handleChange}
+                aria-label="Main Navigation"
+                className={classes.tabContainer} indicatorColor="primary">
+
+                {routes.map((route, index) => renderTabs(route.name, route.link, index))}
             </Tabs>
+
             <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
 
             <Menu id="simple-menu" anchorEl={anchorEl} open={openMenu} onClose={handleClose}
@@ -224,21 +237,14 @@ const Header = () => {
             <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)}
                 classes={{ paper: classes.drawer }}>
                 <List disablePadding>
-                    <ListItem divider button component={Link} to="/" selected={value === 0} onClick={() => { setOpenDrawer(false); setValue(0) }}>
-                        <ListItemText className={value === 0 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>Home</ListItemText>
-                    </ListItem>
-                    <ListItem divider button component={Link} to="/services" selected={value === 1} onClick={() => { setOpenDrawer(false); setValue(1) }}>
-                        <ListItemText className={value === 1 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>Services</ListItemText>
-                    </ListItem>
-                    <ListItem divider button component={Link} to="/revolution" selected={value === 2} onClick={() => { setOpenDrawer(false); setValue(2) }}>
-                        <ListItemText className={value === 2 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>The Revolution</ListItemText>
-                    </ListItem>
-                    <ListItem divider button component={Link} to="/about" selected={value === 3} onClick={() => { setOpenDrawer(false); setValue(3) }}>
-                        <ListItemText className={value === 3 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>About Us</ListItemText>
-                    </ListItem>
-                    <ListItem divider button component={Link} to="/contact" selected={value === 4} onClick={() => { setOpenDrawer(false); setValue(4) }}>
-                        <ListItemText className={value === 4 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>Contact Us</ListItemText>
-                    </ListItem>
+                    {routes.map((route, index) => (
+                        <ListItem key={index} divider button component={Link} to={route.link} selected={value === indexedAccessType} onClick={() => { setOpenDrawer(false); setValue(route.activeIndex) }
+                        }>
+                            <ListItemText className={value === route.activeIndex ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>{route.name}</ListItemText>
+                        </ListItem>
+
+                    ))}
+
                     <ListItem divider button component={Link} to="/estimate" selected={value === 5} onClick={() => { setOpenDrawer(false); setValue(5) }} className={classes.drawerItemEstimate}>
                         <ListItemText className={value === 5 ? [classes.drawerItem, classes.drawerItemSelected, classes.drawerTextEstimate] : [classes.drawerItem, classes.drawerTextEstimate]} disableTypography>Free Estimate</ListItemText>
                     </ListItem>
