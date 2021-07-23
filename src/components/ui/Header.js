@@ -20,7 +20,6 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { indexedAccessType } from '@babel/types';
 
 const useStyles = makeStyles(theme => ({
     // Puts a cushion behind our nav bar so that the next content is visible 
@@ -112,7 +111,13 @@ const useStyles = makeStyles(theme => ({
         // color: "black",
     },
     drawerItemSelected: {
-        opacity: 1
+        "& .MuiListItemText-root": {
+            opacity: 1
+        }
+    },
+    appBar: {
+        // places appbar above drawer
+        zIndex: theme.zIndex.modal + 1
     }
 }));
 
@@ -220,7 +225,7 @@ const Header = () => {
             <Menu id="simple-menu" anchorEl={anchorEl} open={openMenu} onClose={handleClose}
                 MenuListProps={{ onMouseLeave: handleClose }}
                 classes={{ paper: classes.menu }}
-                elevation={0}>
+                elevation={0} keepMounted style={{zIndex: 1302}}>
 
                 {menuOptions.map((option, index) => (
                     <MenuItem key={index} onClick={e => { handleMenuItemClick(e, index); setValue(1); }} selected={index === selectedIndex && value === 1} component={Link} to={option.link}
@@ -236,17 +241,18 @@ const Header = () => {
         <>
             <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)}
                 classes={{ paper: classes.drawer }}>
+                <div className={classes.toolbarMargin} />
                 <List disablePadding>
                     {routes.map((route, index) => (
-                        <ListItem key={index} divider button component={Link} to={route.link} selected={value === indexedAccessType} onClick={() => { setOpenDrawer(false); setValue(route.activeIndex) }
-                        }>
-                            <ListItemText className={value === route.activeIndex ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>{route.name}</ListItemText>
+                        <ListItem key={index} divider button component={Link} to={route.link} selected={value === route.activeIndex} onClick={() => { setOpenDrawer(false); setValue(route.activeIndex) }} classes={{ selected: classes.drawerItemSelected }}
+                        >
+                            <ListItemText className={classes.drawerItem} disableTypography>{route.name}</ListItemText>
                         </ListItem>
 
                     ))}
 
-                    <ListItem divider button component={Link} to="/estimate" selected={value === 5} onClick={() => { setOpenDrawer(false); setValue(5) }} className={classes.drawerItemEstimate}>
-                        <ListItemText className={value === 5 ? [classes.drawerItem, classes.drawerItemSelected, classes.drawerTextEstimate] : [classes.drawerItem, classes.drawerTextEstimate]} disableTypography>Free Estimate</ListItemText>
+                    <ListItem divider button component={Link} to="/estimate" selected={value === 5} onClick={() => { setOpenDrawer(false); setValue(5) }} classes={{root: classes.drawerItemEstimate, selected: classes.drawerItemSelected}}>
+                        <ListItemText className={[classes.drawerItem, classes.drawerTextEstimate].join(' ')} disableTypography>Free Estimate</ListItemText>
                     </ListItem>
                 </List>
             </SwipeableDrawer>
@@ -258,7 +264,7 @@ const Header = () => {
     return (
         <>
             <ElevationScroll>
-                <AppBar position="fixed">
+                <AppBar position="fixed" className={classes.appBar}>
                     <Toolbar disableGutters>
                         <Button component={Link} to="/" className={classes.logoContainer} disableRipple onClick={() => setValue(0)}>
                             <img src={logo} alt="Arc Development Company Logo" className={classes.logo} />
@@ -267,7 +273,7 @@ const Header = () => {
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
-            <div className={classes.toolbarMargin}></div>
+            <div className={classes.toolbarMargin} />
         </>
     );
 }
