@@ -138,13 +138,14 @@ const Header = () => {
                         </Button>
                         <Tabs value={value} onChange={handleChange} aria-label="Main Navigation" className={classes.tabContainer} indicatorColor="primary">
                             <Tab className={classes.tab} label="Home" component={Link} to="/" />
-                            <Tab className={classes.tab} label="Services" component={Link} to="/services" aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onClick={e => handleClick(e)} />
+                            <Tab className={classes.tab} label="Services" component={Link} to="/services" aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={e => handleClick(e)} />
                             <Tab className={classes.tab} label="The Revolution" component={Link} to="revolution" />
                             <Tab className={classes.tab} label="About Us" component={Link} to="about" />
                             <Tab className={classes.tab} label="Contact Us" component={Link} to="contact" />
                         </Tabs>
                         <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
                         <Menu id="simple-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
+                            <MenuItem onClick={handleClose}>Services</MenuItem>
                             <MenuItem onClick={handleClose}>Custom Software Development</MenuItem>
                             <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
                             <MenuItem onClick={handleClose}>Website Development</MenuItem>
