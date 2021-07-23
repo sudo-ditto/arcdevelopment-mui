@@ -13,6 +13,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+// Drawer
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
     // Puts a cushion behind our nav bar so that the next content is visible 
@@ -68,6 +72,17 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             opacity: 1
         }
+    },
+    drawerIconContainer: {
+        marginLeft: "auto",
+        "&:hover": {
+            backgroundColor: "transparent"
+        }
+    },
+    drawerIcon: {
+        height: "50px",
+        width: "50px",
+        color: "white"
     }
 }));
 
@@ -96,12 +111,17 @@ const Header = () => {
     const theme = useTheme();
     // Medium and below vp returns true
     const matches = useMediaQuery(theme.breakpoints.down("md"));
-    const [value, setValue] = useState(0);
+    // Check if viewed on iOS
+    const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+    const [openDrawer, setOpenDrawer] = useState(false);
     // Stores whichever component we clicked on to anchor the menu to it
     // Eventually it's going to storee the services tab
     const [anchorEl, setAnchorEl] = useState(null);
-    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(0);
+    const [openMenu, setOpenMenu] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(1);
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -109,17 +129,17 @@ const Header = () => {
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
-        setOpen(true);
+        setOpenMenu(true);
     }
     const handleMenuItemClick = (e, i) => {
         setAnchorEl(null);
-        setOpen(false);
+        setOpenMenu(false);
         setSelectedIndex(i);
     }
 
     const handleClose = (e) => {
         setAnchorEl(null);
-        setOpen(false);
+        setOpenMenu(false);
     }
 
     // Correct page refresh default active link always being home 
@@ -211,7 +231,7 @@ const Header = () => {
             </Tabs>
             <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
 
-            <Menu id="simple-menu" anchorEl={anchorEl} open={open} onClose={handleClose}
+            <Menu id="simple-menu" anchorEl={anchorEl} open={openMenu} onClose={handleClose}
                 MenuListProps={{ onMouseLeave: handleClose }}
                 classes={{ paper: classes.menu }}
                 elevation={0}>
@@ -223,6 +243,18 @@ const Header = () => {
                 ))}
             </Menu>
         </>
+    );
+
+
+    const drawer = (
+        <>
+            <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)} >
+                Example
+            </SwipeableDrawer>
+            <IconButton onClick={() => setOpenDrawer(!openDrawer)}disableRipple className={classes.drawerIconContainer}>
+                <MenuIcon className={classes.drawerIcon}/>
+            </IconButton>
+        </>
     )
     return (
         <>
@@ -232,7 +264,7 @@ const Header = () => {
                         <Button component={Link} to="/" className={classes.logoContainer} disableRipple onClick={() => setValue(0)}>
                             <img src={logo} alt="Arc Development Company Logo" className={classes.logo} />
                         </Button>
-                        {matches ? null : tabs}
+                        {matches ? drawer : tabs}
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
