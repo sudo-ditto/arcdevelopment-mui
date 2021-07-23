@@ -17,6 +17,9 @@ import { useTheme } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles(theme => ({
     // Puts a cushion behind our nav bar so that the next content is visible 
@@ -73,6 +76,17 @@ const useStyles = makeStyles(theme => ({
             opacity: 1
         }
     },
+    drawer: {
+        backgroundColor: theme.palette.common.blue
+    },
+    drawerItem: {
+        ...theme.typography.tab,
+        color: "white",
+        opacity: 0.7,
+        "&:hover": {
+            opacity: 1
+        }
+    },
     drawerIconContainer: {
         marginLeft: "auto",
         "&:hover": {
@@ -83,6 +97,21 @@ const useStyles = makeStyles(theme => ({
         height: "50px",
         width: "50px",
         color: "white"
+    },
+    drawerItemEstimate: {
+        backgroundColor: theme.palette.common.orange,
+        "&:hover": {
+            "& $drawerTextEstimate": {
+                color: "white"
+            }
+        },
+        transition: "all 0.4s"
+    },
+    drawerTextEstimate: {
+        // color: "black",
+    },
+    drawerItemSelected: {
+        opacity: 1
     }
 }));
 
@@ -248,11 +277,31 @@ const Header = () => {
 
     const drawer = (
         <>
-            <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)} >
-                Example
+            <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)}
+                classes={{ paper: classes.drawer }}>
+                <List disablePadding>
+                    <ListItem divider button component={Link} to="/" selected={value === 0} onClick={() => { setOpenDrawer(false); setValue(0) }}>
+                        <ListItemText className={value === 0 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>Home</ListItemText>
+                    </ListItem>
+                    <ListItem divider button component={Link} to="/services" selected={value === 1} onClick={() => { setOpenDrawer(false); setValue(1) }}>
+                        <ListItemText className={value === 1 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>Services</ListItemText>
+                    </ListItem>
+                    <ListItem divider button component={Link} to="/revolution" selected={value === 2} onClick={() => { setOpenDrawer(false); setValue(2) }}>
+                        <ListItemText className={value === 2 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>The Revolution</ListItemText>
+                    </ListItem>
+                    <ListItem divider button component={Link} to="/about" selected={value === 3} onClick={() => { setOpenDrawer(false); setValue(3) }}>
+                        <ListItemText className={value === 3 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>About Us</ListItemText>
+                    </ListItem>
+                    <ListItem divider button component={Link} to="/contact" selected={value === 4} onClick={() => { setOpenDrawer(false); setValue(4) }}>
+                        <ListItemText className={value === 4 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem} disableTypography>Contact Us</ListItemText>
+                    </ListItem>
+                    <ListItem divider button component={Link} to="/estimate" selected={value === 5} onClick={() => { setOpenDrawer(false); setValue(5) }} className={classes.drawerItemEstimate}>
+                        <ListItemText className={value === 5 ? [classes.drawerItem, classes.drawerItemSelected, classes.drawerTextEstimate] : [classes.drawerItem, classes.drawerTextEstimate]} disableTypography>Free Estimate</ListItemText>
+                    </ListItem>
+                </List>
             </SwipeableDrawer>
-            <IconButton onClick={() => setOpenDrawer(!openDrawer)}disableRipple className={classes.drawerIconContainer}>
-                <MenuIcon className={classes.drawerIcon}/>
+            <IconButton onClick={() => setOpenDrawer(!openDrawer)} disableRipple className={classes.drawerIconContainer}>
+                <MenuIcon className={classes.drawerIcon} />
             </IconButton>
         </>
     )
