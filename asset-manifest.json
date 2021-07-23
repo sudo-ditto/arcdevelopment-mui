@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/arcdevelopment-mui/static/js/main.f2cd0cdc.chunk.js",
+    "main.js.map": "/arcdevelopment-mui/static/js/main.f2cd0cdc.chunk.js.map",
+    "runtime-main.js": "/arcdevelopment-mui/static/js/runtime-main.7ee6e8e0.js",
+    "runtime-main.js.map": "/arcdevelopment-mui/static/js/runtime-main.7ee6e8e0.js.map",
+    "static/js/2.0d6b1443.chunk.js": "/arcdevelopment-mui/static/js/2.0d6b1443.chunk.js",
+    "static/js/2.0d6b1443.chunk.js.map": "/arcdevelopment-mui/static/js/2.0d6b1443.chunk.js.map",
+    "static/js/3.c53418a0.chunk.js": "/arcdevelopment-mui/static/js/3.c53418a0.chunk.js",
+    "static/js/3.c53418a0.chunk.js.map": "/arcdevelopment-mui/static/js/3.c53418a0.chunk.js.map",
+    "index.html": "/arcdevelopment-mui/index.html",
+    "static/js/2.0d6b1443.chunk.js.LICENSE.txt": "/arcdevelopment-mui/static/js/2.0d6b1443.chunk.js.LICENSE.txt",
+    "static/media/logo.b9bbc23c.svg": "/arcdevelopment-mui/static/media/logo.b9bbc23c.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7ee6e8e0.js",
+    "static/js/2.0d6b1443.chunk.js",
+    "static/js/main.f2cd0cdc.chunk.js"
+  ]
+}
