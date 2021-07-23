@@ -13,16 +13,35 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+// Drawer
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles(theme => ({
     // Puts a cushion behind our nav bar so that the next content is visible 
     toolbarMargin: {
         ...theme.mixins.toolbar,
-        marginBottom: "3.5em"
+        marginBottom: "3.5em",
+        [theme.breakpoints.down("md")]: {
+            marginBottom: "2em"
+        },
+        [theme.breakpoints.down("xs")]: {
+            marginBottom: "1.25em"
+        }
     },
     logo: {
         // Adding extra height in order to put the following content
-        height: "8em"
+        height: "8em",
+        [theme.breakpoints.down("md")]: {
+            height: "7em"
+        },
+        [theme.breakpoints.down("xs")]: {
+            height: "5.5em"
+        }
     },
     logoContainer: {
         padding: 0,
@@ -56,15 +75,60 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             opacity: 1
         }
+    },
+    drawer: {
+        backgroundColor: theme.palette.common.blue
+    },
+    drawerItem: {
+        ...theme.typography.tab,
+        color: "white",
+        opacity: 0.7,
+        "&:hover": {
+            opacity: 1
+        }
+    },
+    drawerIconContainer: {
+        marginLeft: "auto",
+        "&:hover": {
+            backgroundColor: "transparent"
+        }
+    },
+    drawerIcon: {
+        height: "50px",
+        width: "50px",
+        color: "white"
+    },
+    drawerItemEstimate: {
+        backgroundColor: theme.palette.common.orange,
+        "&:hover": {
+            "& $drawerTextEstimate": {
+                color: "white"
+            }
+        },
+        transition: "all 0.4s"
+    },
+    drawerTextEstimate: {
+        // color: "black",
+    },
+    drawerItemSelected: {
+        "& .MuiListItemText-root": {
+            opacity: 1
+        }
+    },
+    appBar: {
+        // places appbar above drawer
+        zIndex: theme.zIndex.modal + 1
     }
 }));
 
 const menuOptions = [
-    { name: 'Services', link: '/services', },
-    { name: 'Custom Software Development', link: '/customSoftware', },
-    { name: 'Mobile App Development', link: '/mobileapps', },
-    { name: 'Website Development', link: '/websites', },
-]
+    { name: 'Services', link: '/services', activeIndex: 1, selectedIndex: 0 },
+    { name: 'Custom Software Development', link: '/customSoftware', activeIndex: 1, selectedIndex: 1 },
+    { name: 'Mobile App Development', link: '/mobileapps', activeIndex: 1, selectedIndex: 2 },
+    { name: 'Website Development', link: '/websites', activeIndex: 1, selectedIndex: 3 },
+];
+
+const routes = [{ name: "Home", link: "/", activeIndex: 0 }, { name: "Services", link: "/services", activeIndex: 1 }, { name: "The Revolution", link: "/revolution", activeIndex: 2 }, { name: "About Us", link: "/about", activeIndex: 3 }, { name: "Contact Us", link: "/contact", activeIndex: 4 }];
 
 function ElevationScroll(props) {
     const { children } = props;
@@ -84,12 +148,17 @@ const Header = () => {
     const theme = useTheme();
     // Medium and below vp returns true
     const matches = useMediaQuery(theme.breakpoints.down("md"));
-    const [value, setValue] = useState(0);
+    // Check if viewed on iOS
+    const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+    const [openDrawer, setOpenDrawer] = useState(false);
     // Stores whichever component we clicked on to anchor the menu to it
     // Eventually it's going to storee the services tab
     const [anchorEl, setAnchorEl] = useState(null);
-    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(0);
+    const [openMenu, setOpenMenu] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(1);
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -97,112 +166,66 @@ const Header = () => {
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
-        setOpen(true);
+        setOpenMenu(true);
     }
     const handleMenuItemClick = (e, i) => {
         setAnchorEl(null);
-        setOpen(false);
+        setOpenMenu(false);
         setSelectedIndex(i);
     }
 
     const handleClose = (e) => {
         setAnchorEl(null);
-        setOpen(false);
+        setOpenMenu(false);
+    }
+
+    const renderTabs = (name, link, index) => {
+        if (name === "Services") {
+            return (
+                <Tab key={index} className={classes.tab} label={name} component={Link} to={link} aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={e => handleClick(e)} />
+            );
+        } else {
+            return (
+                <Tab key={index} className={classes.tab} label={name} component={Link} to={link} />
+            );
+        }
     }
 
     // Correct page refresh default active link always being home 
 
     useEffect(() => {
-        switch (window.location.pathname) {
-            case "/": {
-                if (value !== 0) {
-                    setValue(0);
-                }
-                break;
+        [...menuOptions, ...routes].forEach(route => {
+            switch (window.location.pathname) {
+                case `${route.link}`:
+                    if (value !== route.activeIndex) {
+                        setValue(route.activeIndex);
+                        if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
+                            setSelectedIndex(route.selectedIndex);
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
-
-            case "/services": {
-                if (value !== 1) {
-                    setValue(1);
-                    setSelectedIndex(0);
-                }
-                break;
-            }
-
-            case "/customSoftware": {
-                if (value !== 1) {
-                    setValue(1);
-                    setSelectedIndex(1);
-                }
-                break;
-            }
-
-            case "/mobileapps": {
-                if (value !== 1) {
-                    setValue(1);
-                    setSelectedIndex(2);
-                }
-                break;
-            }
-
-            case "/websites": {
-                if (value !== 1) {
-                    setValue(1);
-                    setSelectedIndex(3);
-                }
-                break;
-            }
-
-            case "/revolution": {
-                if (value !== 2) {
-                    setValue(2);
-                }
-                break;
-            }
-
-            case "/about": {
-                if (value !== 3) {
-                    setValue(3);
-                }
-                break;
-            }
-
-            case "/contact": {
-                if (value !== 4) {
-                    setValue(4);
-                }
-                break;
-            }
-
-            case "/estiamte": {
-                if (value !== 5) {
-                    setValue(5);
-                }
-                break;
-            }
-
-            default:
-                break;
-        }
-
-        // eslint-disable-next-line 
-    }, [])
+        });
+    }, [value, selectedIndex])
 
     const tabs = (
         <>
-            <Tabs value={value} onChange={handleChange} aria-label="Main Navigation" className={classes.tabContainer} indicatorColor="primary">
-                <Tab className={classes.tab} label="Home" component={Link} to="/" />
-                <Tab className={classes.tab} label="Services" component={Link} to="/services" aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={e => handleClick(e)} />
-                <Tab className={classes.tab} label="The Revolution" component={Link} to="revolution" />
-                <Tab className={classes.tab} label="About Us" component={Link} to="about" />
-                <Tab className={classes.tab} label="Contact Us" component={Link} to="contact" />
+            <Tabs value={value}
+                onChange={handleChange}
+                aria-label="Main Navigation"
+                className={classes.tabContainer} indicatorColor="primary">
+
+                {routes.map((route, index) => renderTabs(route.name, route.link, index))}
             </Tabs>
+
             <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
 
-            <Menu id="simple-menu" anchorEl={anchorEl} open={open} onClose={handleClose}
+            <Menu id="simple-menu" anchorEl={anchorEl} open={openMenu} onClose={handleClose}
                 MenuListProps={{ onMouseLeave: handleClose }}
                 classes={{ paper: classes.menu }}
-                elevation={0}>
+                elevation={0} keepMounted style={{zIndex: 1302}}>
 
                 {menuOptions.map((option, index) => (
                     <MenuItem key={index} onClick={e => { handleMenuItemClick(e, index); setValue(1); }} selected={index === selectedIndex && value === 1} component={Link} to={option.link}
@@ -211,20 +234,46 @@ const Header = () => {
                 ))}
             </Menu>
         </>
+    );
+
+
+    const drawer = (
+        <>
+            <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)}
+                classes={{ paper: classes.drawer }}>
+                <div className={classes.toolbarMargin} />
+                <List disablePadding>
+                    {routes.map((route, index) => (
+                        <ListItem key={index} divider button component={Link} to={route.link} selected={value === route.activeIndex} onClick={() => { setOpenDrawer(false); setValue(route.activeIndex) }} classes={{ selected: classes.drawerItemSelected }}
+                        >
+                            <ListItemText className={classes.drawerItem} disableTypography>{route.name}</ListItemText>
+                        </ListItem>
+
+                    ))}
+
+                    <ListItem divider button component={Link} to="/estimate" selected={value === 5} onClick={() => { setOpenDrawer(false); setValue(5) }} classes={{root: classes.drawerItemEstimate, selected: classes.drawerItemSelected}}>
+                        <ListItemText className={[classes.drawerItem, classes.drawerTextEstimate].join(' ')} disableTypography>Free Estimate</ListItemText>
+                    </ListItem>
+                </List>
+            </SwipeableDrawer>
+            <IconButton onClick={() => setOpenDrawer(!openDrawer)} disableRipple className={classes.drawerIconContainer}>
+                <MenuIcon className={classes.drawerIcon} />
+            </IconButton>
+        </>
     )
     return (
         <>
             <ElevationScroll>
-                <AppBar position="fixed">
+                <AppBar position="fixed" className={classes.appBar}>
                     <Toolbar disableGutters>
                         <Button component={Link} to="/" className={classes.logoContainer} disableRipple onClick={() => setValue(0)}>
                             <img src={logo} alt="Arc Development Company Logo" className={classes.logo} />
                         </Button>
-                        {matches ? null : tabs}
+                        {matches ? drawer : tabs}
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
-            <div className={classes.toolbarMargin}></div>
+            <div className={classes.toolbarMargin} />
         </>
     );
 }

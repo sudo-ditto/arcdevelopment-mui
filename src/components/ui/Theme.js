@@ -21,7 +21,7 @@ export default createTheme({
             fontFamily: "Raleway",
             textTransform: "none",
             fontWeight: 700,
-            fontSize: "1rem"
+            fontSize: "1rem",
         },
         estimate: {
             fontFamily: "Pacifico, sans-serif",
