@@ -42,9 +42,27 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "50px",
         marginRight: "25px",
         height: "44px",
+    },
+    menu: {
+        backgroundColor: theme.palette.common.blue,
+        color: "white",
+        borderRadius: "0px"
+    },
+    menuItem: {
+        ...theme.typography.tab,
+        opacity: 0.7,
+        "&:hover": {
+            opacity: 1
+        }
     }
 }));
 
+const menuOptions = [
+    { name: 'Services', link: '/services', },
+    { name: 'Custom Software Development', link: '/customSoftware', },
+    { name: 'Mobile App Development', link: '/mobileapps', },
+    { name: 'Website Development', link: '/websites', },
+]
 
 function ElevationScroll(props) {
     const { children } = props;
@@ -66,6 +84,7 @@ const Header = () => {
     // Eventually it's going to storee the services tab
     const [anchorEl, setAnchorEl] = useState(null);
     const [open, setOpen] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(1);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -74,6 +93,11 @@ const Header = () => {
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
         setOpen(true);
+    }
+    const handleMenuItemClick = (e, i) => {
+        setAnchorEl(null);
+        setOpen(false);
+        setSelectedIndex(i);
     }
 
     const handleClose = (e) => {
@@ -94,6 +118,25 @@ const Header = () => {
             case "/services":
                 if (value !== 1) {
                     setValue(1);
+                    setSelectedIndex(0);
+                }
+                break;
+            case "/customSoftware":
+                if (value !== 1) {
+                    setValue(1);
+                    setSelectedIndex(1);
+                }
+                break;
+            case "/mobileapps":
+                if (value !== 1) {
+                    setValue(1);
+                    setSelectedIndex(2);
+                }
+                break;
+            case "/websites":
+                if (value !== 1) {
+                    setValue(1);
+                    setSelectedIndex(3);
                 }
                 break;
 
@@ -122,7 +165,6 @@ const Header = () => {
                 break;
             default:
                 break;
-
         }
 
         // eslint-disable-next-line 
@@ -144,11 +186,17 @@ const Header = () => {
                             <Tab className={classes.tab} label="Contact Us" component={Link} to="contact" />
                         </Tabs>
                         <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
-                        <Menu id="simple-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
-                            <MenuItem onClick={handleClose}>Services</MenuItem>
-                            <MenuItem onClick={handleClose}>Custom Software Development</MenuItem>
-                            <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
-                            <MenuItem onClick={handleClose}>Website Development</MenuItem>
+
+                        <Menu id="simple-menu" anchorEl={anchorEl} open={open} onClose={handleClose}
+                            MenuListProps={{ onMouseLeave: handleClose }}
+                            classes={{ paper: classes.menu }}
+                            elevation={0}>
+
+                            {menuOptions.map((option, index) => (
+                                <MenuItem key={index} onClick={e => { handleMenuItemClick(e, index); setValue(1); handleClose() }} selected={index === selectedIndex && value === 1} component={Link} to={option.link}
+                                    classes={{ root: classes.menuItem }}>{option.name}</MenuItem>
+
+                            ))}
                         </Menu>
                     </Toolbar>
                 </AppBar>
