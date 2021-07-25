@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Header from '../components/ui/Header';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../components/ui/Theme';
 import { Route, Switch } from 'react-router-dom';
+import Header from '../components/ui/Header';
+import Home from './Home';
 import Footer from '../components/ui/Footer';
 // Removes default margin for elements underneath
 // E.g solves elements not expanding full width due to body margin
@@ -17,7 +18,7 @@ function App() {
       <CssBaseline />
       <Header value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
       <Switch>
-        <Route exact path="/" component={() => <div>Home</div>} />
+        <Route exact path="/" component={Home} />
         <Route path="/services" component={() => <div>Services</div>} />
         <Route path="/customSoftware" component={() => <div>Custom Software</div>} />
         <Route path="/mobileapps" component={() => <div>Mobile Apps</div>} />

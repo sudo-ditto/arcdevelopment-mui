@@ -28,6 +28,13 @@ export default createTheme({
             fontSize: "1rem",
             color: "white",
             textTransform: "none"
+        },
+        h2: {
+            fontFamily: "Raleway",
+            fontWeight: 700,
+            fontSize: "2.5rem",
+            color: `${arcBlue}`,
+            lineHeight: "1.5"
         }
     }
 });
