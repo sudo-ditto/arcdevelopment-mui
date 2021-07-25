@@ -57,15 +57,14 @@ const useStyles = makeStyles(theme => ({
         right: "2em",
         [theme.breakpoints.down("xs")]: {
             right: "0.6em",
-            height:"100%",
+            height: "100%",
             margin: "0px"
         }
     }
 }));
 
-const Footer = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
+const Footer = ({ setValue, setSelectedIndex }) => {
     const classes = useStyles();
-
 
     return (
         <footer className={classes.footer}>
@@ -147,7 +146,7 @@ const Footer = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
                 </Grid>
             </Grid>
         </footer>
-    )
+    );
 }
 
 
