@@ -143,7 +143,7 @@ function ElevationScroll(props) {
 }
 
 
-const Header = () => {
+const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
     const classes = useStyles();
     const theme = useTheme();
     // Medium and below vp returns true
@@ -155,9 +155,7 @@ const Header = () => {
     // Stores whichever component we clicked on to anchor the menu to it
     // Eventually it's going to storee the services tab
     const [anchorEl, setAnchorEl] = useState(null);
-    const [value, setValue] = useState(0);
     const [openMenu, setOpenMenu] = useState(false);
-    const [selectedIndex, setSelectedIndex] = useState(1);
 
 
     const handleChange = (event, newValue) => {
@@ -208,6 +206,7 @@ const Header = () => {
                     break;
             }
         });
+        // eslint-disable-next-line
     }, [value, selectedIndex])
 
     const tabs = (
@@ -225,7 +224,7 @@ const Header = () => {
             <Menu id="simple-menu" anchorEl={anchorEl} open={openMenu} onClose={handleClose}
                 MenuListProps={{ onMouseLeave: handleClose }}
                 classes={{ paper: classes.menu }}
-                elevation={0} keepMounted style={{zIndex: 1302}}>
+                elevation={0} keepMounted style={{ zIndex: 1302 }}>
 
                 {menuOptions.map((option, index) => (
                     <MenuItem key={index} onClick={e => { handleMenuItemClick(e, index); setValue(1); }} selected={index === selectedIndex && value === 1} component={Link} to={option.link}
@@ -251,7 +250,7 @@ const Header = () => {
 
                     ))}
 
-                    <ListItem divider button component={Link} to="/estimate" selected={value === 5} onClick={() => { setOpenDrawer(false); setValue(5) }} classes={{root: classes.drawerItemEstimate, selected: classes.drawerItemSelected}}>
+                    <ListItem divider button component={Link} to="/estimate" selected={value === 5} onClick={() => { setOpenDrawer(false); setValue(5) }} classes={{ root: classes.drawerItemEstimate, selected: classes.drawerItemSelected }}>
                         <ListItemText className={[classes.drawerItem, classes.drawerTextEstimate].join(' ')} disableTypography>Free Estimate</ListItemText>
                     </ListItem>
                 </List>
