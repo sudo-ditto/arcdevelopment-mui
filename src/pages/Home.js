@@ -3,12 +3,14 @@ import Lottie from 'react-lottie';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { useMediaQuery } from '@material-ui/core';
-import { spacing } from '@material-ui/system';
 import ButtonArrow from '../components/ui/ButtonArrow';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+
+import CallToAction from '../components/ui/CallToAction';
+
 import animationData from '../animations/landinganimation/data';
 import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
@@ -285,6 +287,10 @@ const Home = () => {
                         </Grid>
                     </Grid>
                 </Grid>
+            </Grid>
+            {/*Call to action*/}
+            <Grid item>
+                <CallToAction />
             </Grid>
         </Grid>
     )
