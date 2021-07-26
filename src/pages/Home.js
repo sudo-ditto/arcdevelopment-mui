@@ -2,15 +2,18 @@ import React from 'react';
 import Lottie from 'react-lottie';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { useMediaQuery } from '@material-ui/core';
+import ButtonArrow from '../components/ui/ButtonArrow';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import ButtonArrow from '../components/ui/ButtonArrow';
-import { useMediaQuery } from '@material-ui/core';
-import animationData from '../animations/landinganimation/data';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
+import animationData from '../animations/landinganimation/data';
 import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
 import websitesIcon from '../assets/websiteIcon.svg';
+import revolutionBackground from '../assets/repeatingBackground.svg';
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -80,14 +83,37 @@ const useStyles = makeStyles(theme => ({
     icon: {
         marginLeft: "2em",
         [theme.breakpoints.down("xs")]: {
-            marginTop: "0"
+            marginTop: "2.5em",
+            marginLeft: "0",
+            width: "15em"
         }
     },
     serviceContainer: {
         marginTop: "12em",
+        boxSizing: "border-box",
         [theme.breakpoints.down("sm")]: {
-            padding: "25px"
+            padding: "25px",
         }
+    },
+    revolutionBackground: {
+        backgroundImage: `url(${revolutionBackground})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        height: "100%",
+        width: "100%"
+    },
+    revolutionCard: {
+        position: "absolute",
+        boxShadow: theme.shadows[10],
+        borderRadius: 15,
+        padding: "10em",
+        boxSizing: "border-box",
+        [theme.breakpoints.down("sm")]: {
+            padding: "8em 0",
+            borderRadius: 0,
+            width: "100%"
+        }   
     }
 
 }));
@@ -111,7 +137,7 @@ const Home = () => {
             <Grid item> {/*----- Hero Block -----*/}
                 <Grid container justifyContent="flex-end" alignItems="center" direction="row">
                     <Grid item sm className={classes.heroTextContainer}>
-                        <Typography align="center" variant="h2" >
+                        <Typography align="center" variant="h2">
                             Bringing West Coast Technology <br />to the Midwest
                         </Typography>
                         <Grid container justifyContent="center" className={classes.buttonContainer}>
@@ -134,7 +160,7 @@ const Home = () => {
                 {/*----- Custom Software Block -----*/}
                 <Grid container direction="row" className={classes.serviceContainer} justifyContent={matchesSM ? "center" : undefined}>
                     <Grid item style={{ marginLeft: matchesSM ? 0 : "5em", textAlign: matchesSM ? "center" : undefined }}>
-                        <Typography variant="h4" >
+                        <Typography variant="h4" gutterBottom>
                             Custom Software Development
                         </Typography>
                         <Typography variant="subtitle1" className={classes.subtitle}>
@@ -157,7 +183,7 @@ const Home = () => {
                 {/*----- iOS/Andoid Software Block -----*/}
                 <Grid container direction="row" className={classes.serviceContainer} justifyContent={matchesSM ? "center" : "flex-end"}>
                     <Grid item style={{ textAlign: matchesSM ? "center" : undefined }}>
-                        <Typography variant="h4" >
+                        <Typography variant="h4" gutterBottom>
                             iOS/Android App Development
                         </Typography>
                         <Typography variant="subtitle1" className={classes.subtitle}>
@@ -179,7 +205,7 @@ const Home = () => {
                 {/*----- Websites Block -----*/}
                 <Grid container direction="row" className={classes.serviceContainer} justifyContent={matchesSM ? "center" : undefined}>
                     <Grid item style={{ marginLeft: matchesSM ? 0 : "5em", textAlign: matchesSM ? "center" : undefined }}>
-                        <Typography variant="h4" >
+                        <Typography variant="h4" gutterBottom>
                             Website Development
                         </Typography>
                         <Typography variant="subtitle1" className={classes.subtitle}>
@@ -195,6 +221,30 @@ const Home = () => {
                     <Grid item>
                         <img className={classes.icon} src={websitesIcon} alt="Website  icon" />
                     </Grid>
+                </Grid>
+            </Grid>
+            {/*Revolution Card*/}
+            <Grid item style={{ height: "100em", marginTop: "12em" }}>
+                <Grid container className={classes.revolutionBackground} alignItems="center" justifyContent="center">
+                    <Card className={classes.revolutionCard}>
+                        <CardContent>
+                            <Grid container direction="column" style={{ textAlign: "center" }}>
+                                <Grid item>
+                                    <Typography gutterBottom variant="h3" >
+                                        The Revolution
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography variant="subtitle1" gutterBottom>
+                                        Visionary insights coupled with cutting-edge technology is a recipe for revolution.
+                                    </Typography>
+                                    <Button variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
+                                        <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} />
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
                 </Grid>
             </Grid>
         </Grid>
