@@ -3,17 +3,18 @@ import Lottie from 'react-lottie';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { useMediaQuery } from '@material-ui/core';
+import { spacing } from '@material-ui/system';
 import ButtonArrow from '../components/ui/ButtonArrow';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-
 import animationData from '../animations/landinganimation/data';
 import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
 import websitesIcon from '../assets/websiteIcon.svg';
 import revolutionBackground from '../assets/repeatingBackground.svg';
+import infoBackground from '../assets/infoBackground.svg';
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -113,7 +114,16 @@ const useStyles = makeStyles(theme => ({
             padding: "8em 0",
             borderRadius: 0,
             width: "100%"
-        }   
+        }
+    },
+    informationContainer: {
+        height: "80em",
+        backgroundImage: `url(${infoBackground})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        margin: 0
     }
 
 }));
@@ -122,6 +132,7 @@ const Home = () => {
     const classes = useStyles();
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+    const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
     const defaultOptions = {
         loop: true,
@@ -223,7 +234,7 @@ const Home = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            {/*Revolution Card*/}
+            {/*Revolution Block*/}
             <Grid item style={{ height: "100em", marginTop: "12em" }}>
                 <Grid container className={classes.revolutionBackground} alignItems="center" justifyContent="center">
                     <Card className={classes.revolutionCard}>
@@ -245,6 +256,34 @@ const Home = () => {
                             </Grid>
                         </CardContent>
                     </Card>
+                </Grid>
+            </Grid>
+            {/*Information Block*/}
+            <Grid item >
+                <Grid container direction={matchesXS ? "column" : "row"} alignItems="center" justifyContent={matchesSM ? "center" : undefined} className={classes.informationContainer} spacing={10}>
+                    <Grid item style={{ marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em", textAlign: matchesXS ? "center" : "inherit" }} sm mb={10}>
+                        <Grid container direction="column"
+                        >
+                            <Typography variant="h2" style={{ color: "white" }}>About us</Typography>
+                            <Typography gutterBottom variant="subtitle2">Let's get personal.</Typography>
+                            <Grid item >
+                                <Button style={{ color: "white", borderColor: "white" }} variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
+                                    <ButtonArrow width={15} height={15} fill="white" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item style={{ marginRight: matchesXS ? 0 : matchesSM ? "2em" : "5em", textAlign: matchesXS ? "center" : "right" }} sm >
+                        <Grid container direction="column">
+                            <Typography variant="h2" style={{ color: "white" }}>Contact us</Typography>
+                            <Typography gutterBottom variant="subtitle2">Say hello! <span role="img" aria-label="waving-hand">👋🏻 </span> </Typography>
+                            <Grid item >
+                                <Button style={{ color: "white", borderColor: "white" }} variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
+                                    <ButtonArrow width={15} height={15} fill="white" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
