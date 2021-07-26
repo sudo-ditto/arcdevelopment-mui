@@ -10,6 +10,7 @@ import animationData from '../animations/landinganimation/data';
 
 import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
+import websitesIcon from '../assets/websiteIcon.svg';
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -45,6 +46,7 @@ const useStyles = makeStyles(theme => ({
         ...theme.typography.learnButton,
         fontSize: "0.7rem",
         height: 35,
+        marginTop: "2em",
         [theme.breakpoints.down("sm")]: {
             margin: "2em 0",
         }
@@ -169,7 +171,29 @@ const Home = () => {
                             <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} /></Button>
                     </Grid>
                     <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
-                        <img className={classes.icon} src={mobileAppsIcon} alt="Custom Software icon" />
+                        <img className={classes.icon} src={mobileAppsIcon} alt="iOs/Android Development icon" />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item >
+                {/*----- Websites Block -----*/}
+                <Grid container direction="row" className={classes.serviceContainer} justifyContent={matchesSM ? "center" : undefined}>
+                    <Grid item style={{ marginLeft: matchesSM ? 0 : "5em", textAlign: matchesSM ? "center" : undefined }}>
+                        <Typography variant="h4" >
+                            Website Development
+                        </Typography>
+                        <Typography variant="subtitle1" className={classes.subtitle}>
+                            Reach More. Discover More. Sell More.
+                        </Typography>
+                        <Typography variant="subtitle1" >
+                            Optimized for Search Engines, built for speed.
+                        </Typography>
+                        <Button variant="outlined" className={classes.learnButton} >
+                            <span style={{ marginRight: 10 }}>Learn More</span>
+                            <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} /></Button>
+                    </Grid>
+                    <Grid item>
+                        <img className={classes.icon} src={websitesIcon} alt="Website  icon" />
                     </Grid>
                 </Grid>
             </Grid>
