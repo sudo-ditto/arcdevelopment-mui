@@ -86,7 +86,7 @@ const Footer = ({ setValue, setSelectedIndex }) => {
                                 Custom Software Development
                             </Grid>
                             <Grid item component={Link} to="/mobileapps" className={classes.link} onClick={() => { setValue(1); setSelectedIndex(2) }}>
-                                Mobile App Development
+                                iOS/Android App Development
                             </Grid>
                             <Grid item component={Link} to="/websites" className={classes.link} onClick={() => { setValue(1); setSelectedIndex(3) }}>
                                 Website Development

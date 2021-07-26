@@ -2,18 +2,19 @@ import { createTheme } from '@material-ui/core/styles';
 
 const arcBlue = "#0B72B9";
 const arcOrange = "#FFBA60";
+const arcGrey = "#A6A6A6";
 
 export default createTheme({
     palette: {
         common: {
-            blue: `${arcBlue}`,
-            orange: `${arcOrange}`
+            blue: arcBlue,
+            orange: arcOrange
         },
         primary: {
-            main: `${arcBlue}`,
+            main: arcBlue,
         },
         secondary: {
-            main: `${arcOrange}`
+            main: arcOrange
         }
     },
     typography: {
@@ -33,8 +34,28 @@ export default createTheme({
             fontFamily: "Raleway",
             fontWeight: 700,
             fontSize: "2.5rem",
-            color: `${arcBlue}`,
+            color: arcBlue,
             lineHeight: "1.5"
+        },
+        h4: {
+            fontFamily: "Raleway",
+            fontWeight: 700,
+            fontSize: "1.75rem",
+            color: arcBlue
+        },
+        subtitle1: {
+            fontWeight: 300,
+            fontSize: "1.25rem",
+            color: `${arcGrey}`
+        },
+        learnButton: {
+            borderColor: arcBlue,
+            color: arcBlue,
+            borderWidth: 2,
+            textTransform: "none",
+            borderRadius: 50,
+            fontFamily: "Roboto",
+            fontWeight: "bold",
         }
     }
 });
