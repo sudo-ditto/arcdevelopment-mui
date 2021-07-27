@@ -5,6 +5,7 @@ import { makeStyles, useTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import backArrow from '../assets/backArrow.svg';
@@ -30,7 +31,10 @@ const useStyles = makeStyles(theme => ({
         padding: "2em 5em 10em",
     },
     iconsContainer: {
-        margin: "10em 0 10em"
+        margin: "10em 0 10em",
+        [theme.breakpoints.down("md")]: {
+            margin: "10em 0 10em",
+        }
     },
     itemContainer: {
         maxWidth: "50em"
@@ -39,7 +43,9 @@ const useStyles = makeStyles(theme => ({
 
 const CustomSoftware = ({ setSelectedIndex }) => {
     const classes = useStyles();
-    const matchesSM = useMediaQuery("sm");
+    const theme = useTheme();
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
 
     const documentsOptions = {
         loop: true,
@@ -76,14 +82,16 @@ const CustomSoftware = ({ setSelectedIndex }) => {
 
     return (
         <Grid container direction="column" className={classes.mainContainer}>
-            <Grid item container direction="row" justifyContent="space-between">
-                <Grid item className={classes.arrowContainer} style={{ marginRight: "1em", marginLeft: "-3.5em" }}>
-                    <IconButton component={Link} to="/services">
-                        <img src={backArrow} alt="Back to  Service Page" />
-                    </IconButton>
-                </Grid>
+            <Grid item container direction="row" justifyContent={matchesMD ? "center" : "space-between"} >
+                <Hidden mdDown>
+                    <Grid item className={classes.arrowContainer} style={{ marginRight: "1em", marginLeft: "-3.5em" }}>
+                        <IconButton component={Link} to="/services">
+                            <img src={backArrow} alt="Back to  Service Page" />
+                        </IconButton>
+                    </Grid>
+                </Hidden>
 
-                <Grid item container direction="column" className={classes.content}>
+                <Grid item container direction="column" className={classes.content} align={matchesMD ? "center" : undefined}>
                     <Grid item>
                         <Typography variant="h2" gutterBottom>
                             Custom Software Development
@@ -114,17 +122,20 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid item className={classes.arrowContainer} >
-                    <IconButton component={Link} to="/mobileapps" onClick={() => setSelectedIndex(2)}>
-                        <img src={forwardArrow} alt="Forward to  iOS/Android Development Page" />
-                    </IconButton>
-                </Grid>
+                <Hidden mdDown>
+                    <Grid item className={classes.arrowContainer} >
+                        <IconButton component={Link} to="/mobileapps" onClick={() => setSelectedIndex(2)}>
+                            <img src={forwardArrow} alt="Forward to  iOS/Android Development Page" />
+                        </IconButton>
+                    </Grid>
+                </Hidden>
             </Grid>
+            {/*Icons*/}
             <Grid item container direction="row" justifyContent="center" className={classes.iconsContainer}>
-                <Grid item container md={6}>
+                <Grid item container lg={6} md={8} spacing={matchesSM ? 10 : undefined}>
                     <Grid item container direction="column" md alignItems="center">
                         <Grid item>
-                            <Typography variant="h4">Save Energy</Typography>
+                            <Typography variant="h4" gutterBottom>Save Energy</Typography>
                         </Grid>
                         <Grid item>
                             <img src={lightbulb} alt="Lightbulb" />
@@ -132,7 +143,7 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                     </Grid>
                     <Grid item container direction="column" md alignItems="center">
                         <Grid item>
-                            <Typography variant="h4">Save Time</Typography>
+                            <Typography variant="h4" gutterBottom>Save Time</Typography>
                         </Grid>
                         <Grid item>
                             <img src={stopwatch} alt="Stopwatch" />
@@ -140,7 +151,7 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                     </Grid>
                     <Grid item container direction="column" md alignItems="center">
                         <Grid item>
-                            <Typography variant="h4">Save Money</Typography>
+                            <Typography variant="h4" gutterBottom>Save Money</Typography>
                         </Grid>
                         <Grid item>
                             <img src={cash} alt="Cash" />
@@ -148,7 +159,8 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item container direction="row" justifyContent="space-between">
+            {/*Data*/}
+            <Grid item container direction={matchesMD ? "column" : "row"} justifyContent="space-between" alignItems={matchesMD ? "center" : undefined} spacing={10}>
                 <Grid item container className={classes.itemContainer} md>
                     <Grid item container direction="column" md>
                         <Grid item>
@@ -218,8 +230,8 @@ const CustomSoftware = ({ setSelectedIndex }) => {
 
                     </Grid>
                 </Grid>
-                {/*Root-Cause Block*/}
-                <Grid item container direction="row" justifyContent="space-between">
+                {/*Automation and UX Block*/}
+                <Grid item container direction="row" direction={matchesMD ? "column" : "row"} justifyContent="space-between" alignItems={matchesMD ? "center" : undefined} justifyContent="space-between" style={{ marginBottom: "10em" }} spacing={10}>
                     <Grid item container className={classes.itemContainer} md>
                         <Grid item container direction="column" md>
                             <Grid item>
