@@ -23,7 +23,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/services" component={Services} />
         <Route path="/customSoftware">
-          <CustomSoftware setValue={setValue} setSelectedIndex={setSelectedIndex}/>
+          <CustomSoftware setSelectedIndex={setSelectedIndex}/>
         </Route>
         <Route path="/mobileapps" component={() => <div>Mobile Apps</div>} />
         <Route path="/websites" component={() => <div>Websites</div>} />

@@ -12,10 +12,12 @@ import forwardArrow from '../assets/forwardArrow.svg';
 import lightbulb from '../assets/bulb.svg';
 import cash from '../assets/cash.svg';
 import stopwatch from '../assets/stopwatch.svg';
+import documentsAnimation from '../animations/documentsAnimation/data.js';
+import scaleAnimation from '../animations/scaleAnimation/data.json';
 
 const useStyles = makeStyles(theme => ({
     content: {
-        maxWidth: "40em"
+        maxWidth: "43em"
     },
     arrowContainer: {
         marginTop: "0.5em"
@@ -25,12 +27,28 @@ const useStyles = makeStyles(theme => ({
     },
     iconsContainer: {
         margin: "10em 0 10em"
-    }
+    },
 }));
 
-const CustomSoftware = ({ setValue, setSelectedIndex }) => {
+const CustomSoftware = ({ setSelectedIndex }) => {
     const classes = useStyles();
 
+    const documentsOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: documentsAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+    const scaleOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: scaleAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
 
     return (
         <Grid container direction="column" className={classes.mainContainer}>
@@ -42,8 +60,8 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
                 </Grid>
 
                 <Grid item container direction="column" className={classes.content}>
-                    <Grid item >
-                        <Typography variant="h2">
+                    <Grid item>
+                        <Typography variant="h2" gutterBottom>
                             Custom Software Development
                         </Typography>
                     </Grid>
@@ -80,7 +98,7 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
             </Grid>
             <Grid item container direction="row" justifyContent="center" className={classes.iconsContainer}>
                 <Grid item container md={6}>
-                    <Grid item container direction="column" md  alignItems="center">
+                    <Grid item container direction="column" md alignItems="center">
                         <Grid item>
                             <Typography variant="h4">Save Energy</Typography>
                         </Grid>
@@ -88,7 +106,7 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
                             <img src={lightbulb} alt="Lightbulb" />
                         </Grid>
                     </Grid>
-                    <Grid item container direction="column" md  alignItems="center">
+                    <Grid item container direction="column" md alignItems="center">
                         <Grid item>
                             <Typography variant="h4">Save Time</Typography>
                         </Grid>
@@ -96,13 +114,66 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
                             <img src={stopwatch} alt="Stopwatch" />
                         </Grid>
                     </Grid>
-                    <Grid item container direction="column" md  alignItems="center">
+                    <Grid item container direction="column" md alignItems="center">
                         <Grid item>
                             <Typography variant="h4">Save Money</Typography>
                         </Grid>
                         <Grid item>
                             <img src={cash} alt="Cash" />
                         </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item container direction="row" justifyContent="space-between">
+                <Grid item container className={classes.content}>
+                    <Grid item container direction="column" md>
+                        <Grid item>
+                            <Typography variant="h4" gutterBottom>
+                                Total Document &amp; Data
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="body1" paragraph>
+                                Reduce Errors. Reduce Waste. Reduce Costs.
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="body1" paragraph>
+                                Billions are spent annually on the purchasing, printing, and
+                                distribution of paper. On top of the massive environmental
+                                impact this has, it causes harm to your bottom line as well.
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="body1" paragraph>
+                                By utilizing digital forms and documents you can remove these
+                                obsolete expenses, accelerate your communication, and help the
+                                Earth.
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid item md>
+                        <Lottie options={documentsOptions} style={{ maxHeight: 325, maxWidth: 275, minHeight: 275 }} />
+                    </Grid>
+                </Grid>
+                <Grid item container className={classes.content}>
+                    <Grid item md>
+                        <Lottie options={scaleOptions} style={{ maxWidth: 280, minHeight: 260 }} />
+                    </Grid>
+                    <Grid item container direction="column" md align="right">
+                        <Grid item>
+                            <Typography variant="h4" gutterBottom >
+                                Scale
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="body1" paragraph>
+                                Whether you’re a large brand, just getting started, or taking
+                                off right now, our application architecture ensures pain-free
+                                growth and reliability.
+                            </Typography>
+                        </Grid>
+
                     </Grid>
                 </Grid>
             </Grid>
