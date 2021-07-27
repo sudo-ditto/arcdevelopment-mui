@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
     },
     mainContainer: {
         padding: "2em 5em 10em",
+        [theme.breakpoints.down("sm")]: {
+            padding: "1em 1.5em 1em",
+        }
     },
     iconsContainer: {
         margin: "10em 0 10em",
@@ -160,12 +163,12 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                 </Grid>
             </Grid>
             {/*Data*/}
-            <Grid item container direction={matchesMD ? "column" : "row"} justifyContent="space-between" alignItems={matchesMD ? "center" : undefined} spacing={10}>
-                <Grid item container className={classes.itemContainer} md>
-                    <Grid item container direction="column" md>
+            <Grid item container direction={matchesMD ? "column" : "row"} justifyContent="space-between" alignItems={matchesMD ? "center" : undefined} spacing={matchesMD ? 10 : undefined}>
+                <Grid item container className={classes.itemContainer} md direction={matchesSM ? "column" : "row"}>
+                    <Grid item container direction="column" md align={matchesSM ? "center" : undefined}>
                         <Grid item>
-                            <Typography variant="h4" gutterBottom>
-                                Total Document &amp; Data
+                            <Typography variant="h4" gutterBottom >
+                                Digital Document &amp; Data
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -188,11 +191,11 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid item md>
+                    <Grid item md >
                         <Lottie options={documentsOptions} style={{ maxHeight: 275, maxWidth: 275, minHeight: 250 }} />
                     </Grid>
                 </Grid>
-                <Grid item container className={classes.itemContainer} md>
+                <Grid item container className={classes.itemContainer} md spacing={matchesSM ? 10 : undefined} direction={matchesSM ? "column" : "row"}>
                     <Grid item md>
                         <Lottie options={scaleOptions} style={{ minWidth: 380, maxWidth: 300, minHeight: 100, maxHeight: 350 }} />
                     </Grid>
@@ -214,7 +217,7 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                 <Grid item container direction="row" style={{ margin: "10em 0" }}>
                     <Grid item container direction="column" align="center" alignItems="center">
                         <Grid item>
-                            <img src={roots} alt="Tree with roots extending out" height="450em" width="450em" />
+                            <img src={roots} alt="Tree with roots extending out" height={matchesSM ? "300em" : "450em"} width={matchesSM ? "300em" : "450em"} />
                         </Grid>
                         <Grid item className={classes.itemContainer}>
                             <Typography variant="h4" gutterBottom>Root-Cause Analysis</Typography>
@@ -232,7 +235,7 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                 </Grid>
                 {/*Automation and UX Block*/}
                 <Grid item container direction="row" direction={matchesMD ? "column" : "row"} justifyContent="space-between" alignItems={matchesMD ? "center" : undefined} justifyContent="space-between" style={{ marginBottom: "10em" }} spacing={10}>
-                    <Grid item container className={classes.itemContainer} md>
+                    <Grid item container className={classes.itemContainer} md direction={matchesSM ? "column" : "row"} spacing={matchesSM ? 10 : undefined}>
                         <Grid item container direction="column" md>
                             <Grid item>
                                 <Typography variant="h4" gutterBottom>
@@ -261,7 +264,7 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                             <Lottie options={automationOptions} style={{ maxHeight: 290, maxWidth: 280 }} />
                         </Grid>
                     </Grid>
-                    <Grid item container className={classes.itemContainer} md>
+                    <Grid item container className={classes.itemContainer} md direction={matchesSM ? "column" : "row"} spacing={matchesSM ? 10 : undefined}>
                         <Grid item md>
                             <Lottie options={uxOptions} style={{ maxWidth: 155, maxHeight: 310 }} />
                         </Grid>
