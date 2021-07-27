@@ -9,31 +9,46 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import backArrow from '../assets/backArrow.svg';
 import forwardArrow from '../assets/forwardArrow.svg';
+import lightbulb from '../assets/bulb.svg';
+import cash from '../assets/cash.svg';
+import stopwatch from '../assets/stopwatch.svg';
 
 const useStyles = makeStyles(theme => ({
-
+    content: {
+        maxWidth: "40em"
+    },
+    arrowContainer: {
+        marginTop: "0.5em"
+    },
+    mainContainer: {
+        padding: "2em 5em 10em",
+    },
+    iconsContainer: {
+        margin: "10em 0 10em"
+    }
 }));
 
-const CustomSoftware = () => {
+const CustomSoftware = ({ setValue, setSelectedIndex }) => {
     const classes = useStyles();
 
+
     return (
-        <Grid container direction="column">
-            <Grid item container direction="row">
-                <Grid item>
-                    <IconButton>
+        <Grid container direction="column" className={classes.mainContainer}>
+            <Grid item container direction="row" justifyContent="space-between">
+                <Grid item className={classes.arrowContainer} style={{ marginRight: "1em", marginLeft: "-3.5em" }}>
+                    <IconButton component={Link} to="/services">
                         <img src={backArrow} alt="Back to  Service Page" />
                     </IconButton>
                 </Grid>
 
-                <Grid item container direction="column">
+                <Grid item container direction="column" className={classes.content}>
                     <Grid item >
                         <Typography variant="h2">
                             Custom Software Development
                         </Typography>
                     </Grid>
 
-                    <Grid item container direction="column">
+                    <Grid item container direction="column" >
                         <Typography variant="body1" paragraph>
                             Whether we’re replacing old software or inventing new solutions,
                             Arc Development is here to help your business tackle technology.
@@ -57,10 +72,38 @@ const CustomSoftware = () => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid item>
-                    <IconButton>
-                        <img src={forwardArrow} alt="Forward to  Service Page" />
+                <Grid item className={classes.arrowContainer} >
+                    <IconButton component={Link} to="/mobileapps" onClick={() => setSelectedIndex(2)}>
+                        <img src={forwardArrow} alt="Forward to  iOS/Android Development Page" />
                     </IconButton>
+                </Grid>
+            </Grid>
+            <Grid item container direction="row" justifyContent="center" className={classes.iconsContainer}>
+                <Grid item container md={6}>
+                    <Grid item container direction="column" md  alignItems="center">
+                        <Grid item>
+                            <Typography variant="h4">Save Energy</Typography>
+                        </Grid>
+                        <Grid item>
+                            <img src={lightbulb} alt="Lightbulb" />
+                        </Grid>
+                    </Grid>
+                    <Grid item container direction="column" md  alignItems="center">
+                        <Grid item>
+                            <Typography variant="h4">Save Time</Typography>
+                        </Grid>
+                        <Grid item>
+                            <img src={stopwatch} alt="Stopwatch" />
+                        </Grid>
+                    </Grid>
+                    <Grid item container direction="column" md  alignItems="center">
+                        <Grid item>
+                            <Typography variant="h4">Save Money</Typography>
+                        </Grid>
+                        <Grid item>
+                            <img src={cash} alt="Cash" />
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

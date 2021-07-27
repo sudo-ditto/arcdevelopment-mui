@@ -58,6 +58,11 @@ export default createTheme({
             fontSize: "1.25rem",
             color: "white"
         },
+        body1: {
+            fontWeight: 300,
+            fontSize: "1.25rem",
+            color: arcGrey
+        },
         learnButton: {
             borderColor: arcBlue,
             color: arcBlue,
@@ -66,6 +71,6 @@ export default createTheme({
             borderRadius: 50,
             fontFamily: "Roboto",
             fontWeight: "bold",
-        }
+        },
     }
 });
