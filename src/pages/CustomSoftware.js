@@ -12,8 +12,12 @@ import forwardArrow from '../assets/forwardArrow.svg';
 import lightbulb from '../assets/bulb.svg';
 import cash from '../assets/cash.svg';
 import stopwatch from '../assets/stopwatch.svg';
-import documentsAnimation from '../animations/documentsAnimation/data.js';
+import roots from '../assets/root.svg';
+
+import documentsAnimation from '../animations/documentsAnimation/data';
 import scaleAnimation from '../animations/scaleAnimation/data.json';
+import automationAnimation from '../animations/automationAnimation/data.json';
+import uxAnimation from '../animations/uxAnimation/data';
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -28,10 +32,14 @@ const useStyles = makeStyles(theme => ({
     iconsContainer: {
         margin: "10em 0 10em"
     },
+    itemContainer: {
+        maxWidth: "50em"
+    },
 }));
 
 const CustomSoftware = ({ setSelectedIndex }) => {
     const classes = useStyles();
+    const matchesSM = useMediaQuery("sm");
 
     const documentsOptions = {
         loop: true,
@@ -45,6 +53,22 @@ const CustomSoftware = ({ setSelectedIndex }) => {
         loop: true,
         autoplay: true,
         animationData: scaleAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+    const automationOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: automationAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+    const uxOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: uxAnimation,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -125,7 +149,7 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                 </Grid>
             </Grid>
             <Grid item container direction="row" justifyContent="space-between">
-                <Grid item container className={classes.content}>
+                <Grid item container className={classes.itemContainer} md>
                     <Grid item container direction="column" md>
                         <Grid item>
                             <Typography variant="h4" gutterBottom>
@@ -153,12 +177,12 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                         </Grid>
                     </Grid>
                     <Grid item md>
-                        <Lottie options={documentsOptions} style={{ maxHeight: 325, maxWidth: 275, minHeight: 275 }} />
+                        <Lottie options={documentsOptions} style={{ maxHeight: 275, maxWidth: 275, minHeight: 250 }} />
                     </Grid>
                 </Grid>
-                <Grid item container className={classes.content}>
+                <Grid item container className={classes.itemContainer} md>
                     <Grid item md>
-                        <Lottie options={scaleOptions} style={{ maxWidth: 280, minHeight: 260 }} />
+                        <Lottie options={scaleOptions} style={{ minWidth: 380, maxWidth: 300, minHeight: 100, maxHeight: 350 }} />
                     </Grid>
                     <Grid item container direction="column" md align="right">
                         <Grid item>
@@ -173,7 +197,83 @@ const CustomSoftware = ({ setSelectedIndex }) => {
                                 growth and reliability.
                             </Typography>
                         </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item container direction="row" style={{ margin: "10em 0" }}>
+                    <Grid item container direction="column" align="center" alignItems="center">
+                        <Grid item>
+                            <img src={roots} alt="Tree with roots extending out" height="450em" width="450em" />
+                        </Grid>
+                        <Grid item className={classes.itemContainer}>
+                            <Typography variant="h4" gutterBottom>Root-Cause Analysis</Typography>
+                            <Typography variant="body1" paragraph>
+                                Many problems are merely symptoms of larger, underlying issues.
+                            </Typography>
+                            <Typography variant="body1" paragraph>
+                                We can help you thoroughly examine all areas of your business to
+                                develop a holistic plan for the most effective implementation of
+                                technology.
+                            </Typography>
+                        </Grid>
 
+                    </Grid>
+                </Grid>
+                {/*Root-Cause Block*/}
+                <Grid item container direction="row" justifyContent="space-between">
+                    <Grid item container className={classes.itemContainer} md>
+                        <Grid item container direction="column" md>
+                            <Grid item>
+                                <Typography variant="h4" gutterBottom>
+                                    Automation
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="body1" paragraph>
+                                    Why waste time when you don’t have to?
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="body1" paragraph>
+                                    We can help you identify processes with time or event based
+                                    actions which can now easily be automated.
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="body1" paragraph>
+                                    Increasing efficiency increases profits, leaving you more time
+                                    to focus on your business, not busywork.
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item md>
+                            <Lottie options={automationOptions} style={{ maxHeight: 290, maxWidth: 280 }} />
+                        </Grid>
+                    </Grid>
+                    <Grid item container className={classes.itemContainer} md>
+                        <Grid item md>
+                            <Lottie options={uxOptions} style={{ maxWidth: 155, maxHeight: 310 }} />
+                        </Grid>
+                        <Grid item container direction="column" md align="right">
+                            <Grid item>
+                                <Typography variant="h4" gutterBottom >
+                                    User Experience Design
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="body1" paragraph>
+                                    A good design that isn’t usable isn’t a good design.
+                                </Typography>
+                                <Typography variant="body1" paragraph>
+                                    So why are so many pieces of software complicated, confusing,
+                                    and frustrating?
+                                </Typography>
+                                <Typography variant="body1" paragraph>
+                                    By prioritizing users and the real ways they interact with
+                                    technology we’re able to develop unique, personable experiences
+                                    that solve problems rather than create new ones.
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
