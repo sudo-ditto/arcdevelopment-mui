@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { Typography, useMediaQuery } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Services from '../components/Services/ServicesComponent';
+import ServicesComponent from '../components/Services/ServicesComponent';
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +18,7 @@ const Services = () => {
 
     return (
         <Grid container direction="column">
-            <Services />
+            <ServicesComponent />
         </Grid>
     )
 }
