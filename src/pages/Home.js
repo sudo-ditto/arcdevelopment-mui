@@ -9,14 +9,13 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
+import { Link } from 'react-router-dom';
 import CallToAction from '../components/ui/CallToAction';
 
 import animationData from '../animations/landinganimation/data';
-import customSoftwareIcon from '../assets/customSoftwareIcon.svg';
-import mobileAppsIcon from '../assets/mobileIcon.svg';
-import websitesIcon from '../assets/websiteIcon.svg';
 import revolutionBackground from '../assets/repeatingBackground.svg';
 import infoBackground from '../assets/infoBackground.svg';
+import Services from '../components/Services/ServicesComponent';
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -48,15 +47,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "0.9rem",
         height: 45
     },
-    learnButton: {
-        ...theme.typography.learnButton,
-        fontSize: "0.7rem",
-        height: 35,
-        marginTop: "2em",
-        [theme.breakpoints.down("sm")]: {
-            margin: "2em 0",
-        }
-    },
+
     buttonContainer: {
         marginTop: "1em"
     },
@@ -74,28 +65,6 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "1em",
         [theme.breakpoints.down("xs")]: {
             marginLeft: 0,
-        }
-    },
-    specialText: {
-        fontFamily: "Pacifico",
-        color: theme.palette.common.orange,
-    },
-    subtitle: {
-        marginBottom: "0.8em"
-    },
-    icon: {
-        marginLeft: "2em",
-        [theme.breakpoints.down("xs")]: {
-            marginTop: "2.5em",
-            marginLeft: "0",
-            width: "15em"
-        }
-    },
-    serviceContainer: {
-        marginTop: "12em",
-        boxSizing: "border-box",
-        [theme.breakpoints.down("sm")]: {
-            padding: "25px",
         }
     },
     revolutionBackground: {
@@ -155,10 +124,10 @@ const Home = () => {
                         </Typography>
                         <Grid container justifyContent="center" className={classes.buttonContainer}>
                             <Grid item>
-                                <Button className={classes.estimateButton} variant="contained">Free Estimate</Button>
+                                <Button component={Link} to="/estimate" className={classes.estimateButton} variant="contained">Free Estimate</Button>
                             </Grid>
                             <Grid item>
-                                <Button variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
+                                <Button component={Link} to="/estimate" variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
                                     <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} />
                                 </Button>
                             </Grid>
@@ -169,73 +138,9 @@ const Home = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item >
-                {/*----- Custom Software Block -----*/}
-                <Grid container direction="row" className={classes.serviceContainer} justifyContent={matchesSM ? "center" : undefined}>
-                    <Grid item style={{ marginLeft: matchesSM ? 0 : "5em", textAlign: matchesSM ? "center" : undefined }}>
-                        <Typography variant="h4" gutterBottom>
-                            Custom Software Development
-                        </Typography>
-                        <Typography variant="subtitle1" className={classes.subtitle}>
-                            Save Energy. Save Time. Save Money.
-                        </Typography>
-                        <Typography variant="subtitle1" >
-                            Complete digital solutions, from investigation to{" "}
-                            <span className={classes.specialText} >celebration</span>.
-                        </Typography>
-                        <Button variant="outlined" className={classes.learnButton} >
-                            <span style={{ marginRight: 10 }}>Learn More</span>
-                            <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} /></Button>
-                    </Grid>
-                    <Grid item>
-                        <img className={classes.icon} src={customSoftwareIcon} alt="Custom Software icon" />
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item >
-                {/*----- iOS/Andoid Software Block -----*/}
-                <Grid container direction="row" className={classes.serviceContainer} justifyContent={matchesSM ? "center" : "flex-end"}>
-                    <Grid item style={{ textAlign: matchesSM ? "center" : undefined }}>
-                        <Typography variant="h4" gutterBottom>
-                            iOS/Android App Development
-                        </Typography>
-                        <Typography variant="subtitle1" className={classes.subtitle}>
-                            Extend Functionality. Extend Access. Increase Engagement.
-                        </Typography>
-                        <Typography variant="subtitle1" >
-                            Integrate your web experience or create a standalone{matchesSM ? null : <br />} with either mobile platform.
-                        </Typography>
-                        <Button variant="outlined" className={classes.learnButton} >
-                            <span style={{ marginRight: 10 }}>Learn More</span>
-                            <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} /></Button>
-                    </Grid>
-                    <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
-                        <img className={classes.icon} src={mobileAppsIcon} alt="iOs/Android Development icon" />
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item >
-                {/*----- Websites Block -----*/}
-                <Grid container direction="row" className={classes.serviceContainer} justifyContent={matchesSM ? "center" : undefined}>
-                    <Grid item style={{ marginLeft: matchesSM ? 0 : "5em", textAlign: matchesSM ? "center" : undefined }}>
-                        <Typography variant="h4" gutterBottom>
-                            Website Development
-                        </Typography>
-                        <Typography variant="subtitle1" className={classes.subtitle}>
-                            Reach More. Discover More. Sell More.
-                        </Typography>
-                        <Typography variant="subtitle1" >
-                            Optimized for Search Engines, built for speed.
-                        </Typography>
-                        <Button variant="outlined" className={classes.learnButton} >
-                            <span style={{ marginRight: 10 }}>Learn More</span>
-                            <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} /></Button>
-                    </Grid>
-                    <Grid item>
-                        <img className={classes.icon} src={websitesIcon} alt="Website  icon" />
-                    </Grid>
-                </Grid>
-            </Grid>
+
+            <Services />
+          
             {/*Revolution Block*/}
             <Grid item style={{ height: "100em", marginTop: "12em" }}>
                 <Grid container className={classes.revolutionBackground} alignItems="center" justifyContent="center">
@@ -251,7 +156,7 @@ const Home = () => {
                                     <Typography variant="subtitle1" gutterBottom>
                                         Visionary insights coupled with cutting-edge technology is a recipe for revolution.
                                     </Typography>
-                                    <Button variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
+                                    <Button component={Link} to="/revolution" variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
                                         <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} />
                                     </Button>
                                 </Grid>
@@ -269,7 +174,7 @@ const Home = () => {
                             <Typography variant="h2" style={{ color: "white" }}>About us</Typography>
                             <Typography gutterBottom variant="subtitle2">Let's get personal.</Typography>
                             <Grid item >
-                                <Button style={{ color: "white", borderColor: "white" }} variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
+                                <Button component={Link} to="/about" style={{ color: "white", borderColor: "white" }} variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
                                     <ButtonArrow width={15} height={15} fill="white" />
                                 </Button>
                             </Grid>
@@ -280,7 +185,7 @@ const Home = () => {
                             <Typography variant="h2" style={{ color: "white" }}>Contact us</Typography>
                             <Typography gutterBottom variant="subtitle2">Say hello! <span role="img" aria-label="waving-hand">👋🏻 </span> </Typography>
                             <Grid item >
-                                <Button style={{ color: "white", borderColor: "white" }} variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
+                                <Button component={Link} to="/contact" style={{ color: "white", borderColor: "white" }} variant="outlined" className={classes.learnButtonHero}><span style={{ marginRight: 10 }}>Learn More</span>
                                     <ButtonArrow width={15} height={15} fill="white" />
                                 </Button>
                             </Grid>

@@ -8,6 +8,7 @@ import Footer from '../components/ui/Footer';
 // Removes default margin for elements underneath
 // E.g solves elements not expanding full width due to body margin
 import { CssBaseline } from '@material-ui/core';
+import Services from '../components/Services/ServicesComponent';
 
 function App() {
   const [value, setValue] = useState(0);
@@ -19,7 +20,7 @@ function App() {
       <Header value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/services" component={() => <div>Services</div>} />
+        <Route path="/services" component={Services} />
         <Route path="/customSoftware" component={() => <div>Custom Software</div>} />
         <Route path="/mobileapps" component={() => <div>Mobile Apps</div>} />
         <Route path="/websites" component={() => <div>Websites</div>} />

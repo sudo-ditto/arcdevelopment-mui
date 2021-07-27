@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import ButtonArrow from './ButtonArrow';
 import { useTheme } from '@material-ui/styles';
-
+import {Link} from 'react-router-dom';
 import background from '../../assets/background.jpg';
 import mobileBackground from '../../assets/mobileBackground.jpg';
 import { useMediaQuery } from '@material-ui/core';
@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
+        backgroundAttachment: "static",
         width: "100%",
         padding: "0 5em",
         boxSizing: "border-box",
@@ -68,13 +69,13 @@ const CallToAction = () => {
                             Take advantage of the 21st Century.
                         </Typography>
                         <Grid container item justifyContent="center">
-                            <Button variant="outlined" className={classes.learnButton}><span style={{ marginRight: 5 }}>Learn More</span>
+                            <Button component={Link} to="/revolution" variant="outlined" className={classes.learnButton}><span style={{ marginRight: 5 }}>Learn More</span>
                                 <ButtonArrow width={15} height={15} fill={theme.palette.common.blue} />
                             </Button>
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <Button variant="container" className={classes.estimateButton}>Free Estimate
+                        <Button component={Link} to="/estimate" variant="contained" className={classes.estimateButton}>Free Estimate
                         </Button>
                     </Grid>
                 </Grid>

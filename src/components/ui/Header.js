@@ -205,12 +205,17 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
                         }
                     }
                     break;
+                case '/estimate':
+                    // eslint-disable-next-line
+                    setValue(5);
+                    break;
+
                 default:
                     break;
             }
         });
         // eslint-disable-next-line
-    }, [value, selectedIndex])
+    }, [value, selectedIndex, routes]);
 
     const tabs = (
         <>
@@ -222,7 +227,8 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
                 {routes.map((route, index) => renderTabs(route.name, route.link, index))}
             </Tabs>
 
-            <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
+            <Button component={Link} to="/estimate" variant="contained" color="secondary" className={classes.button} onClick={() => 
+                setValue(5)}>Free Estimate</Button>
 
             <Menu id="simple-menu" anchorEl={anchorEl} open={openMenu} onClose={handleClose}
                 MenuListProps={{ onMouseLeave: handleClose }}
