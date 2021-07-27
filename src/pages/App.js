@@ -10,6 +10,7 @@ import Footer from '../components/ui/Footer';
 import { CssBaseline } from '@material-ui/core';
 import CustomSoftware from './CustomSoftware';
 import Services from './Services';
+import Contact from './Contact';
 
 function App() {
   const [value, setValue] = useState(0);
@@ -29,7 +30,7 @@ function App() {
         <Route path="/websites" component={() => <div>Websites</div>} />
         <Route path="/revolution" component={() => <div>revolution</div>} />
         <Route path="/about" component={() => <div>About</div>} />
-        <Route path="/contact" component={() => <div>Contact</div>} />
+        <Route path="/contact" component={Contact} />
         <Route path="/estimate" component={() => <div>Estimate</div>} />
       </Switch>
       <Footer value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
