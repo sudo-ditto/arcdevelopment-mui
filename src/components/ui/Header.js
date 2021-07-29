@@ -63,6 +63,9 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "50px",
         marginRight: "25px",
         height: "44px",
+        "&:hover": {
+            backgroundColor: theme.palette.secondary.light
+        }
     },
     menu: {
         backgroundColor: theme.palette.common.blue,
@@ -124,7 +127,7 @@ const useStyles = makeStyles(theme => ({
 const menuOptions = [
     { name: 'Services', link: '/services', activeIndex: 1, selectedIndex: 0 },
     { name: 'Custom Software Development', link: '/customSoftware', activeIndex: 1, selectedIndex: 1 },
-    { name: 'Mobile App Development', link: '/mobileapps', activeIndex: 1, selectedIndex: 2 },
+    { name: 'iOS/Android App Development', link: '/mobileapps', activeIndex: 1, selectedIndex: 2 },
     { name: 'Website Development', link: '/websites', activeIndex: 1, selectedIndex: 3 },
 ];
 
@@ -202,12 +205,17 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
                         }
                     }
                     break;
+                case '/estimate':
+                    // eslint-disable-next-line
+                    setValue(5);
+                    break;
+
                 default:
                     break;
             }
         });
         // eslint-disable-next-line
-    }, [value, selectedIndex])
+    }, [value, selectedIndex, routes]);
 
     const tabs = (
         <>
@@ -219,7 +227,8 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
                 {routes.map((route, index) => renderTabs(route.name, route.link, index))}
             </Tabs>
 
-            <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
+            <Button component={Link} to="/estimate" variant="contained" color="secondary" className={classes.button} onClick={() => 
+                setValue(5)}>Free Estimate</Button>
 
             <Menu id="simple-menu" anchorEl={anchorEl} open={openMenu} onClose={handleClose}
                 MenuListProps={{ onMouseLeave: handleClose }}
