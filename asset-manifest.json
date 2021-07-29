@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/arcdevelopment-mui/static/js/main.4868e7fd.chunk.js",
-    "main.js.map": "/arcdevelopment-mui/static/js/main.4868e7fd.chunk.js.map",
+    "main.js": "/arcdevelopment-mui/static/js/main.39b81241.chunk.js",
+    "main.js.map": "/arcdevelopment-mui/static/js/main.39b81241.chunk.js.map",
     "runtime-main.js": "/arcdevelopment-mui/static/js/runtime-main.0d24025f.js",
     "runtime-main.js.map": "/arcdevelopment-mui/static/js/runtime-main.0d24025f.js.map",
-    "static/js/2.eb5fa649.chunk.js": "/arcdevelopment-mui/static/js/2.eb5fa649.chunk.js",
-    "static/js/2.eb5fa649.chunk.js.map": "/arcdevelopment-mui/static/js/2.eb5fa649.chunk.js.map",
+    "static/js/2.04cc8b97.chunk.js": "/arcdevelopment-mui/static/js/2.04cc8b97.chunk.js",
+    "static/js/2.04cc8b97.chunk.js.map": "/arcdevelopment-mui/static/js/2.04cc8b97.chunk.js.map",
     "static/js/3.ecfd938d.chunk.js": "/arcdevelopment-mui/static/js/3.ecfd938d.chunk.js",
     "static/js/3.ecfd938d.chunk.js.map": "/arcdevelopment-mui/static/js/3.ecfd938d.chunk.js.map",
     "index.html": "/arcdevelopment-mui/index.html",
-    "static/js/2.eb5fa649.chunk.js.LICENSE.txt": "/arcdevelopment-mui/static/js/2.eb5fa649.chunk.js.LICENSE.txt",
+    "static/js/2.04cc8b97.chunk.js.LICENSE.txt": "/arcdevelopment-mui/static/js/2.04cc8b97.chunk.js.LICENSE.txt",
     "static/media/backArrow.7279a766.svg": "/arcdevelopment-mui/static/media/backArrow.7279a766.svg",
     "static/media/background.b8d469cc.jpg": "/arcdevelopment-mui/static/media/background.b8d469cc.jpg",
     "static/media/bulb.259a2e4e.svg": "/arcdevelopment-mui/static/media/bulb.259a2e4e.svg",
@@ -29,13 +29,14 @@
     "static/media/phone.98d33f30.svg": "/arcdevelopment-mui/static/media/phone.98d33f30.svg",
     "static/media/repeatingBackground.02252817.svg": "/arcdevelopment-mui/static/media/repeatingBackground.02252817.svg",
     "static/media/root.c1833745.svg": "/arcdevelopment-mui/static/media/root.c1833745.svg",
+    "static/media/send.013d09eb.svg": "/arcdevelopment-mui/static/media/send.013d09eb.svg",
     "static/media/stopwatch.db25634f.svg": "/arcdevelopment-mui/static/media/stopwatch.db25634f.svg",
     "static/media/twitter.e091825a.svg": "/arcdevelopment-mui/static/media/twitter.e091825a.svg",
     "static/media/websiteIcon.549318f5.svg": "/arcdevelopment-mui/static/media/websiteIcon.549318f5.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0d24025f.js",
-    "static/js/2.eb5fa649.chunk.js",
-    "static/js/main.4868e7fd.chunk.js"
+    "static/js/2.04cc8b97.chunk.js",
+    "static/js/main.39b81241.chunk.js"
   ]
 }
