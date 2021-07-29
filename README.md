@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a project I am building alongside a course on Material UI. The solve focus is on learning Material UI. The code structure of the react component is not mine, although I quickly optimized it here and there to make it better as I followed the course.
+This is a project I am building alongside a course on Material UI. The sole focus is on learning Material UI. The code structure of the react component is not mine, although I quickly optimized it here and there to make it better as I followed the course.
 
 (Needs a major refactoring imo)
 

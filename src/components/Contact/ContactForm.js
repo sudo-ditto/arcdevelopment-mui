@@ -66,7 +66,7 @@ const ContactForm = () => {
                 valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(event.target.value);
 
                 if (!valid) {
-                    setPhoneHelper('Invalid Email')
+                    setPhoneHelper('Invalid Phone');
 
                 } else {
                     setPhoneHelper('');
