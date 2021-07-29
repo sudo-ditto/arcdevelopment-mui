@@ -114,17 +114,17 @@ const ContactForm = () => {
                     <TextField fullWidth label="Name" required id="name" value={name} onChange={(e) => setName(e.target.value)} />
                 </Grid>
                 <Grid item style={{ margin: "2em 0" }}>
-                    <TextField helperText={emailHelper} fullWidth label="Email" id="email" value={email}
+                    <TextField required helperText={emailHelper} fullWidth label="Email" id="email" value={email}
                         error={emailHelper.length !== 0}
                         onChange={onChangeHandler} />
                 </Grid>
                 <Grid item>
-                    <TextField helperText={phoneHelper} fullWidth label="Phone" id="phone" value={phone}
+                    <TextField required helperText={phoneHelper} fullWidth label="Phone" id="phone" value={phone}
                         error={phoneHelper.length !== 0} onChange={onChangeHandler} />
                 </Grid>
             </Grid>
             <Grid item style={{ maxWidth: "20em", marginBottom: "3em" }}>
-                <TextField fullWidth multiline rows={10} className={classes.message} InputProps={{ disableUnderline: true }} placeholder="Send a message..." id="message" required value={message} onChange={(e) => setMessage(e.target.value)} />
+                <TextField required fullWidth multiline rows={10} className={classes.message} InputProps={{ disableUnderline: true }} placeholder="Send a message..." id="message" required value={message} onChange={(e) => setMessage(e.target.value)} />
             </Grid>
             <Grid item alignItems="center">
                 <Button disabled={name.length === 0 || message.length === 0 || email.length === 0 || phone.length === 0 || phoneHelper.length !== 0 || emailHelper.length !== 0} variant="container" className={classes.sendButton}>Send Message

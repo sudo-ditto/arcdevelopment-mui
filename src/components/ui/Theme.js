@@ -31,6 +31,13 @@ export default createTheme({
             color: "white",
             textTransform: "none"
         },
+        h1: {
+            fontFamily: "Raleway",
+            fontWeight: 700,
+            fontSize: "2.5rem",
+            color: arcBlue,
+            lineHeight: "1.2",
+        },
         h2: {
             fontFamily: "Raleway",
             fontWeight: 700,
