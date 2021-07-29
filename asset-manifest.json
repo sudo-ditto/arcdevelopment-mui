@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/arcdevelopment-mui/static/js/main.39b81241.chunk.js",
-    "main.js.map": "/arcdevelopment-mui/static/js/main.39b81241.chunk.js.map",
+    "main.js": "/arcdevelopment-mui/static/js/main.270f81d2.chunk.js",
+    "main.js.map": "/arcdevelopment-mui/static/js/main.270f81d2.chunk.js.map",
     "runtime-main.js": "/arcdevelopment-mui/static/js/runtime-main.0d24025f.js",
     "runtime-main.js.map": "/arcdevelopment-mui/static/js/runtime-main.0d24025f.js.map",
-    "static/js/2.04cc8b97.chunk.js": "/arcdevelopment-mui/static/js/2.04cc8b97.chunk.js",
-    "static/js/2.04cc8b97.chunk.js.map": "/arcdevelopment-mui/static/js/2.04cc8b97.chunk.js.map",
+    "static/js/2.8c951384.chunk.js": "/arcdevelopment-mui/static/js/2.8c951384.chunk.js",
+    "static/js/2.8c951384.chunk.js.map": "/arcdevelopment-mui/static/js/2.8c951384.chunk.js.map",
     "static/js/3.ecfd938d.chunk.js": "/arcdevelopment-mui/static/js/3.ecfd938d.chunk.js",
     "static/js/3.ecfd938d.chunk.js.map": "/arcdevelopment-mui/static/js/3.ecfd938d.chunk.js.map",
     "index.html": "/arcdevelopment-mui/index.html",
-    "static/js/2.04cc8b97.chunk.js.LICENSE.txt": "/arcdevelopment-mui/static/js/2.04cc8b97.chunk.js.LICENSE.txt",
+    "static/js/2.8c951384.chunk.js.LICENSE.txt": "/arcdevelopment-mui/static/js/2.8c951384.chunk.js.LICENSE.txt",
     "static/media/backArrow.7279a766.svg": "/arcdevelopment-mui/static/media/backArrow.7279a766.svg",
     "static/media/background.b8d469cc.jpg": "/arcdevelopment-mui/static/media/background.b8d469cc.jpg",
     "static/media/bulb.259a2e4e.svg": "/arcdevelopment-mui/static/media/bulb.259a2e4e.svg",
@@ -36,7 +36,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.0d24025f.js",
-    "static/js/2.04cc8b97.chunk.js",
-    "static/js/main.39b81241.chunk.js"
+    "static/js/2.8c951384.chunk.js",
+    "static/js/main.270f81d2.chunk.js"
   ]
 }
