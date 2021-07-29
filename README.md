@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+# Arc Developent
+
+## Description
+
+This is a project I am building alongside a course on Material UI. The solve focus is on learning Material UI. The code structure of the react component is not mine, although I quickly optimized it here and there to make it better as I followed the course.
+
+(Needs a major refactoring imo)
+
+Currently it's mainly focused and optimized for Chrome and slightly for Mozilla. Cross-browser support for Opera and Safari upcoming. (I am curious how it will look on IE 11 :) )
+
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
