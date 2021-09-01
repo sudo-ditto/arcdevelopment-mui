@@ -94,6 +94,12 @@ export default createTheme({
                     borderBottom: `2px solid ${arcBlue}`
                 }
             }
-        }
+        },
+        MuiDialog: {
+            root: {
+                zIndex: "1305 !important",
+
+            },
+        },
     }
 });
