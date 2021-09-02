@@ -31,6 +31,10 @@ const useStyles = makeStyles(theme => ({
         },
         "&.Mui-disabled": {
             backgroundColor: theme.palette.common.grey
+        },
+        [theme.breakpoints.down("sm")]: {
+            height: 40,
+            width: 225,
         }
     }
 }));
@@ -141,7 +145,7 @@ const ContactForm = () => {
                     padding: matchesXS ? "1em 0" : matchesSM ? "1em 5em" : matchesMD ? "1em 10em" : "1em 20em",
                     maxWidth: "unset"
                 }
-            }} >
+            }}  fullScreen={matchesXS}>
                 <DialogContent>
                     <Grid container direction="column">
                         <Grid item>
@@ -161,11 +165,12 @@ const ContactForm = () => {
                             <TextField helperText={phoneHelper} fullWidth label="Phone" id="phone" value={phone}
                                 error={phoneHelper.length !== 0} onChange={onChangeHandler} />
                         </Grid>
-                        <Grid item style={{ maxWidth: "20em", marginBottom: "3em" }}>
+                        <Grid item style={{ maxWidth: matchesXS ? "100%"
+                         : "20em", marginBottom: "3em" }}>
                             <TextField fullWidth multiline rows={10} className={classes.message} InputProps={{ disableUnderline: true }} placeholder="Send a message..." id="message" required value={message} onChange={(e) => setMessage(e.target.value)} />
                         </Grid>
                     </Grid>
-                    <Grid item container alignItems="center">
+                    <Grid item container alignItems="center" direction={matchesSM ? "column" : "row"}>
                         <Grid item>
                             <Button color="primary" onClick={() => setOpen(false)} style={{ fontWeight: 300 }}>Cancel</Button>
                         </Grid>
