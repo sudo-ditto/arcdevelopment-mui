@@ -52,7 +52,8 @@ export default createTheme({
         h6: {
             fontFamily: "Raleway",
             fontWeight: 500,
-            color: arcBlue
+            color: arcBlue,
+            lineHeight: 1
         },
         subtitle1: {
             fontWeight: 300,
