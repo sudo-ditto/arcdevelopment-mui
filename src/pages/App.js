@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from '../components/ui/Header';
 import Home from './Home';
 import Footer from '../components/ui/Footer';
+import Estimate  from './Estimate';
 // Removes default margin for elements underneath
 // E.g solves elements not expanding full width due to body margin
 import { CssBaseline } from '@material-ui/core';
@@ -31,7 +32,7 @@ function App() {
         <Route path="/revolution" component={() => <div>revolution</div>} />
         <Route path="/about" component={() => <div>About</div>} />
         <Route path="/contact" component={Contact} />
-        <Route path="/estimate" component={() => <div>Estimate</div>} />
+        <Route path="/estimate" component={Estimate} />
       </Switch>
       <Footer value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
     </ThemeProvider>

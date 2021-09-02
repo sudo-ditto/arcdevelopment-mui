@@ -32,11 +32,39 @@ import biometrics from '../assets/biometrics.svg';
 
 import estimateAnimation from '../animations/estimateAnimation/data.json';
 
-const Estimate = () => {
-    return (
-        <div>
+const useStyles = makeStyles(theme => {
 
-        </div>
+});
+
+
+const Estimate = () => {
+    const classes = useStyles();
+    const theme = useTheme();
+
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: estimateAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+
+    return (
+        <Grid container direction="row">
+            <Grid item container direction="column">
+                <Grid item>
+                    <Typography variant="h2">Estimate</Typography>
+                </Grid>
+                <Grid item>
+                    <Lottie options={defaultOptions} height="100%" width="100%"></Lottie>
+                </Grid>
+            </Grid>
+            <Grid item container direction="column">
+
+
+            </Grid>
+        </Grid >
     )
 }
 
