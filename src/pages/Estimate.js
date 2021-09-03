@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Lottie from 'react-lottie';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import { cloneDeep } from 'lodash';
 
 import check from '../assets/check.svg';
 import send from '../assets/send.svg';
@@ -308,9 +309,16 @@ const websiteQuestions = [
     }
 ];
 
+const newQuestions = cloneDeep(defaultQuestions);
+newQuestions[0].options[0].selected = true;
+
+
 const Estimate = () => {
     const classes = useStyles();
     const theme = useTheme();
+
+    // const [questions, setQuestions] = useState(defaultQuestions);
+    const [questions, setQuestions] = useState(softwareQuestions);
 
     const defaultOptions = {
         loop: true,
@@ -320,6 +328,30 @@ const Estimate = () => {
             preserveAspectRatio: 'xMidYMid slice'
         }
     };
+
+    const nextQuestion = () => {
+        const newQuestions = cloneDeep(questions);
+        const currentlyActive = newQuestions.filter(question => question.active);
+        const activeIndex = currentlyActive[0].id - 1;
+        const nextIndex = activeIndex + 1;
+
+        newQuestions[activeIndex] = { ...currentlyActive[0], active: false };
+        newQuestions[nextIndex] = { ...newQuestions[nextIndex], active: true };
+
+        setQuestions(newQuestions);
+    }
+
+    const previousQuestion = () => {
+        const newQuestions = cloneDeep(questions);
+        const currentlyActive = newQuestions.filter(question => question.active);
+        const activeIndex = currentlyActive[0].id - 1;
+        const nextIndex = activeIndex - 1;
+
+        newQuestions[activeIndex] = { ...currentlyActive[0], active: false };
+        newQuestions[nextIndex] = { ...newQuestions[nextIndex], active: true };
+
+        setQuestions(newQuestions);
+    }
 
     return (
         <Grid container direction="row">
@@ -332,46 +364,39 @@ const Estimate = () => {
                 </Grid>
             </Grid>
             <Grid item container direction="column" lg alignItems="center" style={{ marginRight: "2em", marginBottom: "25em" }}>
-                {defaultQuestions.filter(question => question.active).map((question, index) => (
+                {questions.filter(question => question.active).map((question, index) => (
                     <React.Fragment key={index}>
                         <Grid item>
                             <Typography variant="h2" align="center" style={{ fontWeight: 500, marginTop: "5em", fontSize: "2.25rem" }}>{question.title}</Typography>
-                            <Typography variant="body1" align="center" style={{  marginBottom: "2.5em"}} gutterBottom>{question.subtitle}</Typography>
+                            <Typography variant="body1" align="center" style={{ marginBottom: "2.5em" }} gutterBottom>{question.subtitle}</Typography>
+                        </Grid>
+                        <Grid item container>
+                            {question.options.map(option => (
+
+                                <Grid item container direction="column" md >
+                                    <Grid item style={{ maxWidth: "12em" }}>
+                                        <Typography variant="h6" align="center" style={{ marginBottom: "1em" }}>{option.title}</Typography>
+                                        <Typography variant="caption" align="center" style={{ marginBottom: "1em" }}>{option.subtitle}</Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <img src={option.icon} alt={option.iconAlt} className={classes.icon} />
+                                    </Grid>
+                                </Grid>
+                            ))}
                         </Grid>
                     </React.Fragment>
                 ))}
-                <Grid item container>
-                    <Grid item container direction="column" md >
-                        <Grid item style={{ maxWidth: "12em" }}>
-                            <Typography variant="h6" align="center" style={{ marginBottom: "1em" }}>Custom Software Development</Typography>
-                        </Grid>
-                        <Grid item>
-                            <img src={software} alt="Three floating screens" className={classes.icon} />
-                        </Grid>
-                    </Grid>
-                    <Grid item container direction="column" md>
-                        <Grid item style={{ maxWidth: "12em" }}>
-                            <Typography variant="h6" align="center" style={{ marginBottom: "1em" }}>iOS/Android App Development</Typography>
-                        </Grid>
-                        <Grid item>
-                            <img src={mobile} alt="Phones and tablet outline" className={classes.icon} />
-                        </Grid>
-                    </Grid>
-                    <Grid item container direction="column" md>
-                        <Grid item style={{ maxWidth: "12em" }} >
-                            <Typography variant="h6" align="center" style={{ marginBottom: "1em" }}>Website Development</Typography>
-                        </Grid>
-                        <Grid item>
-                            <img src={website} alt="Computer outline" className={classes.icon} />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item container justifyContent="space-between" style={{ width: "15em", marginTop: "3em" }}>
+
+                <Grid item container justifyContent="space-between" style={{ width: "18em", marginTop: "3em" }}>
                     <Grid item>
-                        <img src={backArrow} alt="Previous question" />
+                        <IconButton onClick={previousQuestion}>
+                            <img src={backArrow} alt="Previous question" />
+                        </IconButton>
                     </Grid>
                     <Grid item>
-                        <img src={forwardArrow} alt="Next question" />
+                        <IconButton onClick={nextQuestion}>
+                            <img src={forwardArrow} alt="Next question" />
+                        </IconButton>
                     </Grid>
                 </Grid>
                 <Grid item>
