@@ -317,8 +317,7 @@ const Estimate = () => {
     const classes = useStyles();
     const theme = useTheme();
 
-    // const [questions, setQuestions] = useState(defaultQuestions);
-    const [questions, setQuestions] = useState(softwareQuestions);
+    const [questions, setQuestions] = useState(defaultQuestions);
 
     const defaultOptions = {
         loop: true,
@@ -353,6 +352,60 @@ const Estimate = () => {
         setQuestions(newQuestions);
     }
 
+    const navigationPreviousDisabled = () => {
+        const currentlyActive = questions.filter(question => question.active);
+        if (currentlyActive[0].id === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    const navigationNextDisabled = () => {
+        const currentlyActive = questions.filter(question => question.active);
+
+        if (currentlyActive[0].id === questions[questions.length - 1].id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    const handleSelect = (id) => {
+        const newQuestions = cloneDeep(questions);
+        const currentlyActive = newQuestions.filter(question => question.active);
+        const activeIndex = currentlyActive[0].id - 1;
+
+        const newSelected = newQuestions[activeIndex].options[id - 1];
+        const previousSelected = currentlyActive[0].options.filter(option => option.selected);
+
+        switch (currentlyActive[0].subtitle) {
+            case "Select one.":
+                if (previousSelected[0]) {
+                    previousSelected[0].selected = !previousSelected[0].selected;
+                }
+                newSelected.selected = !newSelected.selected;
+                break;
+            default:
+                newSelected.selected = !newSelected.selected;
+                break;
+        }
+
+        switch (newSelected.title) {
+            case "Custom Software Development":
+                setQuestions(softwareQuestions);
+                break;
+            case "iOS/Android App Development":
+                setQuestions(softwareQuestions);
+                break;
+            case "Website Development":
+                setQuestions(websiteQuestions);
+                break;
+            default:
+                setQuestions(newQuestions);
+                break;
+        }
+    };
+
     return (
         <Grid container direction="row">
             <Grid item container direction="column" lg>
@@ -368,13 +421,15 @@ const Estimate = () => {
                     <React.Fragment key={index}>
                         <Grid item>
                             <Typography variant="h2" align="center" style={{ fontWeight: 500, marginTop: "5em", fontSize: "2.25rem" }}>{question.title}</Typography>
-                            <Typography variant="body1" align="center" style={{ marginBottom: "2.5em" }} gutterBottom>{question.subtitle}</Typography>
+                            <Typography variant="body1" align="center" style={{ marginBottom: "2.5em", lineHeight: "1.25" }} gutterBottom>{question.subtitle}</Typography>
                         </Grid>
                         <Grid item container>
-                            {question.options.map(option => (
+                            {question.options.map((option, index) => (
 
-                                <Grid item container direction="column" md >
-                                    <Grid item style={{ maxWidth: "12em" }}>
+                                <Grid key={index} item container direction="column" md component={Button} style={{ display: "grid", textTransform: "none", backgroundColor: option.selected ? theme.palette.common.orange : null, borderRadius: 0 }}
+                                    onClick={() => handleSelect(option.id)}>
+
+                                    <Grid item style={{ maxWidth: "14em" }}>
                                         <Typography variant="h6" align="center" style={{ marginBottom: "1em" }}>{option.title}</Typography>
                                         <Typography variant="caption" align="center" style={{ marginBottom: "1em" }}>{option.subtitle}</Typography>
                                     </Grid>
@@ -389,13 +444,13 @@ const Estimate = () => {
 
                 <Grid item container justifyContent="space-between" style={{ width: "18em", marginTop: "3em" }}>
                     <Grid item>
-                        <IconButton onClick={previousQuestion}>
-                            <img src={backArrow} alt="Previous question" />
+                        <IconButton disabled={navigationPreviousDisabled()} onClick={previousQuestion}>
+                            <img src={navigationPreviousDisabled() ? backArrowDisabled : backArrow} alt="Previous question" />
                         </IconButton>
                     </Grid>
                     <Grid item>
-                        <IconButton onClick={nextQuestion}>
-                            <img src={forwardArrow} alt="Next question" />
+                        <IconButton disabled={navigationNextDisabled()} onClick={nextQuestion}>
+                            <img src={navigationNextDisabled() ? forwardArrowDisabled : forwardArrow} alt="Next question" />
                         </IconButton>
                     </Grid>
                 </Grid>
