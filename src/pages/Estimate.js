@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { cloneDeep } from 'lodash';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
 
 import check from '../assets/check.svg';
 import send from '../assets/send.svg';
@@ -50,6 +53,17 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             backgroundColor: theme.palette.secondary.light
         }
+    },
+    message: {
+        border: `2px solid ${theme.palette.common.blue}`,
+        marginTop: "5em",
+        borderRadius: 5,
+    },
+    specialText: {
+        fontFamily: "Raleway",
+        fontWeight: 700,
+        fontSize: "4.5rem",
+        color: theme.palette.common.orange
     }
 }));
 
@@ -316,9 +330,15 @@ newQuestions[0].options[0].selected = true;
 const Estimate = () => {
     const classes = useStyles();
     const theme = useTheme();
-
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailHelper, setEmailHelper] = useState('');
+    const [phone, setPhone] = useState('');
+    const [phoneHelper, setPhoneHelper] = useState('');
+    const [message, setMessage] = useState('');
     const [questions, setQuestions] = useState(defaultQuestions);
-
+    const [total, setTotal] = useState(0);
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -406,6 +426,59 @@ const Estimate = () => {
         }
     };
 
+    const onChangeHandler = event => {
+        let valid;
+
+        switch (event.target.id) {
+            case 'email':
+                setEmail(event.target.value);
+                valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value);
+
+                if (!valid) {
+                    setEmailHelper('Invalid Email');
+
+                } else {
+                    setEmailHelper('');
+                }
+                break;
+            case 'phone':
+                setPhone(event.target.value);
+                valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(event.target.value);
+
+                if (!valid) {
+                    setPhoneHelper('Invalid Phone');
+
+                } else {
+                    setPhoneHelper('');
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    const getTotal = () => {
+        let cost = 0;
+
+        // Get selected options
+        const selections = questions.map(question => question.options.filter(options => options.selected)).filter(question => question.length > 0);
+
+        // Update the total cost to equal the sum of all selected options
+        selections.map(options => options.map(option => (cost += option.cost)));
+
+        if (questions.length > 2) {
+            const userCost = questions.filter(
+                question => question.title === "How many users do you expect?"
+            ).map(question => question.options.filter(option => option.selected))[0][0].cost;
+       
+            cost -= userCost;
+            cost *= userCost;
+        }
+
+        setTotal(cost);
+    };
+
     return (
         <Grid container direction="row">
             <Grid item container direction="column" lg>
@@ -455,9 +528,47 @@ const Estimate = () => {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <Button variant="outlined" className={classes.estimateButton}>Get Estimate</Button>
+                    <Button variant="contained" className={classes.estimateButton} onClick={() => { setDialogOpen(true); getTotal() }}>
+                        Get Estimate
+                    </Button>
                 </Grid>
             </Grid>
+
+            {/* Dialog */}
+            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+                <Grid container justify="center">
+                    <Grid item>
+                        <Typography variant="h2" align="center">
+                            Estimate
+                        </Typography>
+                    </Grid>
+                </Grid>
+                <DialogContent>
+                    <Grid container>
+                        <Grid item container direction="column">
+                            <Grid item>
+                                <TextField fullWidth label="Name" required id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                            </Grid>
+                            <Grid item style={{ margin: "2em 0" }}>
+                                <TextField helperText={emailHelper} fullWidth label="Email" id="email" value={email}
+                                    error={emailHelper.length !== 0}
+                                    onChange={onChangeHandler} />
+                            </Grid>
+                            <Grid item>
+                                <TextField helperText={phoneHelper} fullWidth label="Phone" id="phone" value={phone}
+                                    error={phoneHelper.length !== 0} onChange={onChangeHandler} />
+                            </Grid>
+                        </Grid>
+                        <Grid item style={{ maxWidth: "20em", marginBottom: "3em" }}>
+                            <TextField fullWidth multiline rows={10} className={classes.message} InputProps={{ disableUnderline: true }} placeholder="Send a message..." id="message" required value={message} onChange={(e) => setMessage(e.target.value)} />
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="body1">We can create this digital soultion for an estimated <span className={classes.specialText}>${total.toFixed(2)}</span></Typography>
+                            <Typography variant="body1">Fill out your name, phone number, and email, place your request, and we'll get back to you with details moving forward and a final price.</Typography>
+                        </Grid>
+                    </Grid>
+                </DialogContent>
+            </Dialog>
         </Grid >
     )
 }
