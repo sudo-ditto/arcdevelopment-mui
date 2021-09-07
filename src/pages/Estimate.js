@@ -568,11 +568,11 @@ const Estimate = () => {
 
     const softwareSelections = (
         <Grid container direction="column">
-            <Grid item container alignItems="center">
-                <Grid item>
+            <Grid item container alignItems="center" style={{marginBottom: "1.25em"}}>
+                <Grid item xs={2}>
                     <img src={check} alt="checkmark" />
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <Typography variant="body1">
                         You want {service}
                         {platforms.length > 0 ? `for ${
@@ -603,11 +603,11 @@ const Estimate = () => {
                     </Typography>
                 </Grid>
             </Grid>
-            <Grid item container alignItems="center">
-                <Grid item>
+            <Grid item container alignItems="center" style={{marginBottom: "1.25em"}}>
+                <Grid item xs={2}>
                     <img src={check} alt="checkmark" />
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <Typography variant="body1">
                         {"with "}
                         {/* if we have features... */}
@@ -642,10 +642,10 @@ const Estimate = () => {
                 </Grid>
             </Grid>
             <Grid item container alignItems="center">
-                <Grid item>
+                <Grid item xs={2}>
                     <img src={check} alt="checkmark" />
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <Typography variant="body1">
                         The custom features will be of {customFeatures.toLowerCase()} {`, and the project wil be used by about ${users} users`}
                     </Typography>
@@ -657,10 +657,10 @@ const Estimate = () => {
     const websiteSelections = (
         <Grid container direction="column">
             <Grid item container alignItems="center">
-                <Grid item>
+                <Grid item xs={2}>
                     <img src={check} alt="checkmark" />
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <Typography variant="body1">
                         {`You want `}
                         {category === "Basic"
@@ -734,7 +734,7 @@ const Estimate = () => {
             </Grid>
 
             {/* Dialog */}
-            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} PaperProps={{style: {padding: "5em 25em"}}} maxWidth="lg">
+            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="lg">
                 <Grid container justifyContent="center">
                     <Grid item>
                         <Typography variant="h2" align="center">
@@ -743,8 +743,8 @@ const Estimate = () => {
                     </Grid>
                 </Grid>
                 <DialogContent>
-                    <Grid container>
-                        <Grid item container direction="column" md={7}>
+                    <Grid container  justifyContent="space-around">
+                        <Grid item container direction="column" md={7} style={{maxWidth: "20em"}}>
                             <Grid item>
                                 <TextField fullWidth label="Name" required id="name" value={name} onChange={(e) => setName(e.target.value)} />
                             </Grid>
@@ -765,7 +765,7 @@ const Estimate = () => {
                                 <Typography variant="body1">Fill out your name, phone number, and email, place your request, and we'll get back to you with details moving forward and a final price.</Typography>
                             </Grid>
                         </Grid>
-                        <Grid item container direction="column" md={5}>
+                        <Grid item container direction="column" md={5} style={{maxWidth: "30em"}}>
                             <Grid item>
                                 {questions.length > 2
                                     ? softwareSelections
