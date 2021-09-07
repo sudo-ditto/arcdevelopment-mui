@@ -117,7 +117,7 @@ const ContactForm = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item container direction="column" style={{ maxWidth: "20em" }}>
+                <Grid item container direction="column" style={{ width: "20em" }}>
                     <Grid item>
                         <TextField fullWidth label="Name" required id="name" value={name} onChange={(e) => setName(e.target.value)} />
                     </Grid>
@@ -142,10 +142,10 @@ const ContactForm = () => {
             </Grid>
             <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{
                 style: {
-                    padding: matchesXS ? "1em 0" : matchesSM ? "1em 5em" : matchesMD ? "1em 10em" : "1em 20em",
+                    padding: matchesXS ? "1em 0" : matchesSM ? "1em 5em" : matchesMD ? "1em 15em" : "1em 25em",
                     maxWidth: "unset"
                 }
-            }}  fullScreen={matchesXS}>
+            }}  fullScreen={matchesSM}>
                 <DialogContent>
                     <Grid container direction="column">
                         <Grid item>
@@ -165,7 +165,7 @@ const ContactForm = () => {
                             <TextField helperText={phoneHelper} fullWidth label="Phone" id="phone" value={phone}
                                 error={phoneHelper.length !== 0} onChange={onChangeHandler} />
                         </Grid>
-                        <Grid item style={{ maxWidth: matchesXS ? "100%"
+                        <Grid item style={{ maxWidth: matchesSM ? "100%"
                          : "20em", marginBottom: "3em" }}>
                             <TextField fullWidth multiline rows={10} className={classes.message} InputProps={{ disableUnderline: true }} placeholder="Send a message..." id="message" required value={message} onChange={(e) => setMessage(e.target.value)} />
                         </Grid>

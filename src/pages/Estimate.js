@@ -734,7 +734,7 @@ const Estimate = () => {
             </Grid>
 
             {/* Dialog */}
-            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} PaperProps={{style: {padding: "5em 25em"}}} maxWidth="lg">
                 <Grid container justifyContent="center">
                     <Grid item>
                         <Typography variant="h2" align="center">
